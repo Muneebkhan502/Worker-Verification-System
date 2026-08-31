@@ -62,7 +62,7 @@ This system gives them that answer in one scan.
 
 **1. Clone and set up a virtual environment**
 ```bash
-git clone https://github.com/<your-username>/Worker-Verification-System.git
+git clone https://github.com/<Muneebkhan502>/Worker-Verification-System.git
 cd Worker-Verification-System
 python -m venv venv
 venv\Scripts\activate      # Windows
