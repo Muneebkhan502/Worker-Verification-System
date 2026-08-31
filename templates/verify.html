@@ -355,22 +355,174 @@ button,input{font-family:inherit}
   .site-header img.logo{width:205px}
   .hero{height:300px;padding-left:0;background-position:center;justify-content:center}
   .hero h1{font-size:44px}
-  .verify-wrap{
-    min-height:330px;
-    padding-top:44px;
-  }
+  .verify-wrap{min-height:330px;padding-top:44px}
   .verify-card{max-width:460px;padding:30px 24px 28px}
   .verify-input{height:45px;font-size:14px}
   .btn-verify{height:43px}
-  .footer-inner,
-  .footer-bottom{max-width:1080px}
+  .footer-inner,.footer-bottom{max-width:1080px}
   .site-footer{padding-left:24px;padding-right:24px}
+  .footer-inner{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:36px}
+  .footer-logo-box{margin-left:auto;margin-right:auto}
+}
+
+/* Exact narrow/mobile reference layout */
+@media (max-width:768px){
+  html,body{
+    width:100%;
+    min-width:0;
+    overflow-x:hidden;
+  }
+
+  .site-header{
+    height:68px;
+    padding:0 14px;
+  }
+
+  .site-header img.logo{
+    width:190px;
+    height:auto;
+  }
+
+  .hero{
+    height:174px;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-size:cover;
+    background-position:center;
+  }
+
+  .hero h1{
+    font-size:31px;
+    line-height:1;
+    font-weight:300;
+    text-align:center;
+  }
+
+  .verify-wrap{
+    width:100%;
+    min-height:329px;
+    padding:43px 10px 82px;
+  }
+
+  .verify-card{
+    width:100%;
+    max-width:238px;
+    margin:0 auto;
+    padding:22px 20px 24px;
+  }
+
+  .verify-input{
+    width:100%;
+    height:43px;
+    margin-bottom:21px;
+    padding:0 19px;
+    font-size:12px;
+  }
+
+  .btn-verify{
+    width:108px;
+    height:43px;
+    font-size:12px;
+    line-height:43px;
+  }
+
+  .site-footer{
+    width:100%;
+    padding:58px 10px 24px;
+  }
+
   .footer-inner{
-    display:grid;
-    grid-template-columns:1.2fr 1fr 1.2fr;
-    gap:36px;
+    width:100%;
+    max-width:238px;
+    margin:0 auto;
+    display:block !important;
+  }
+
+  .footer-col{
+    width:100%;
+    display:block;
+  }
+
+  .footer-logo-box{
+    width:max-content;
+    max-width:100%;
+    margin:0 auto 24px;
+  }
+
+  .footer-logo-box img{
+    width:190px;
+    max-width:100%;
+    height:auto;
+    display:block;
+    margin:0 auto;
+  }
+
+  .footer-about{
+    width:100%;
+    margin:0 auto 22px;
+    text-align:center;
+    font-size:11px;
+    line-height:1.85;
+  }
+
+  .footer-social{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:9px;
+    margin:0 0 34px;
+  }
+
+  .footer-social a{
+    width:27px;
+    height:27px;
+    flex:0 0 27px;
+  }
+
+  .footer-col + .footer-col{
+    margin-top:0;
+  }
+
+  .footer-col h3{
+    margin:0 0 20px;
+    font-size:18px;
+    line-height:1.2;
+    font-weight:400;
+  }
+
+  .footer-links{
+    margin:0 0 39px;
+    padding:0;
+  }
+
+  .footer-links li{
+    margin:0 0 9px;
+    font-size:11px;
+    line-height:1.25;
+  }
+
+  .footer-contact-row{
+    width:100%;
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin:0 0 14px;
+    font-size:11px;
+    line-height:1.7;
+  }
+
+  .footer-bottom{
+    width:100%;
+    max-width:238px;
+    margin:30px auto 0;
+    padding-top:27px;
+    font-size:10px;
+    line-height:1.8;
   }
 }
+
 </style>
 </head>
 <body>
@@ -399,7 +551,7 @@ button,input{font-family:inherit}
   <div class="footer-inner">
     <div class="footer-col">
       <div class="footer-logo-box">
-        <img src="/static/images/logo2.png" alt="Standard Arabia Inspection Co. Ltd.">
+        <img src="/static/logo2.png" alt="Standard Arabia Inspection Co. Ltd.">
       </div>
 
       <p class="footer-about">
@@ -435,7 +587,7 @@ button,input{font-family:inherit}
     <div class="footer-col">
       <h3>Contact Us</h3>
       <div class="footer-contact-row">
-        <span class="contact-icon">📞</span>
+        <span class="contact-icon">☎</span>
         <span>+966-13-3670801<br>+966-53-9461485</span>
       </div>
       <div class="footer-contact-row">
@@ -511,9 +663,9 @@ button,input{font-family:inherit}
       <div class="msg-ok">Tove Leeds confirms this operator / worker card is verified and on record.</div>
       <div class="data-label">Name</div>
       <div class="data-box">${escapeHtml(w.name ?? '—')}</div>
-      <div class="data-label">Iqama No / ID</div>
+      <div class="data-label">IqamaNo/ID</div>
       <div class="data-box">${escapeHtml(w.iqama_no ?? '—')}</div>
-      <div class="data-label">Trade</div>
+      <div class="data-label">Course Name</div>
       <div class="data-box">${escapeHtml(w.trade ?? w.trade_course ?? '—')}</div>
       <div class="data-label">Card No</div>
       <div class="data-box">${escapeHtml(w.card_number ?? '—')}</div>
@@ -527,7 +679,7 @@ button,input{font-family:inherit}
 
   function renderNotFound() {
     resultBox.innerHTML = `
-      <div class="msg-fail">Card No, Iqama No, or Name doesn't exist or not validated.</div>
+      <div class="msg-fail">Certificate No. or Sticker No. doesn't exist or Not Validated</div>
     `;
     resultBox.classList.add('show');
   }
