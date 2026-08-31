@@ -100,6 +100,6 @@ class WorkerManager():
             ))
 
         if status:
-            query = query.where(Worker.status.ilike(status))
+            query = query.where(Worker.status == status)
 
         return self.db.execute(query).scalars().all()
