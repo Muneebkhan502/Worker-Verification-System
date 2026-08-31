@@ -3,243 +3,369 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verification | Tove Leeds</title>
+<title>Verification</title>
 <style>
-  :root {
-    --brand-blue: #155b8c;
-    --brand-blue-dark: #0d1b3a;
-    --ok-green: #2e7d32;
-    --error-red: #c62828;
-  }
+:root{
+  --blue:#0b689b;
+  --navy:#07122e;
+  --text:#6f7480;
+  --red:#e33434;
+  --green:#198754;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#fff;
+  color:#333;
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:400;
+}
+img{max-width:100%}
+button,input{font-family:inherit}
 
-  * { box-sizing: border-box; }
+/* HEADER */
+.site-header{
+  height:68px;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  background:#fff;
+  border:0;
+}
+.site-header img.logo{
+  display:block;
+  width:191px;
+  height:auto;
+  max-height:55px;
+  object-fit:contain;
+  object-position:left center;
+}
+.menu-icon{
+  width:19px;
+  height:22px;
+  position:relative;
+  cursor:pointer;
+  flex:0 0 19px;
+}
+.menu-icon span,
+.menu-icon:before,
+.menu-icon:after{
+  content:"";
+  position:absolute;
+  right:0;
+  width:10px;
+  height:2px;
+  background:#14658f;
+  border-radius:1px;
+}
+.menu-icon:before{top:4px}
+.menu-icon span{top:10px}
+.menu-icon:after{top:16px;width:6px}
 
-  body {
-    margin: 0;
-    background: #fff;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #333;
-  }
+/* HERO */
+.hero{
+  position:relative;
+  height:174px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding-left:49px;
+  overflow:hidden;
+  background-image:
+    linear-gradient(rgba(24,31,43,.55),rgba(24,31,43,.55)),
+    url("/static/hero.jpg");
+  background-size:cover;
+  background-position:center;
+}
+.hero h1{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:#fff;
+  font-size:31px;
+  line-height:1;
+  font-weight:300;
+  letter-spacing:0;
+}
 
-  /* Header */
-  .site-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 24px;
-    border-bottom: 1px solid #eee;
-  }
-  .site-header img.logo {
-    height: 46px;
-  }
-  .menu-icon {
-    width: 26px;
-    height: 18px;
-    position: relative;
-    cursor: pointer;
-  }
-  .menu-icon span {
-    display: block;
-    height: 2px;
-    background: var(--brand-blue-dark);
-    margin-bottom: 6px;
-  }
-  .menu-icon span:last-child { margin-bottom: 0; width: 60%; }
+/* VERIFICATION AREA */
+.verify-wrap{
+  width:100%;
+  max-width:none;
+  min-height:329px;
+  margin:0;
+  padding:43px 10px 82px;
+  position:relative;
+}
+.verify-card{
+  width:100%;
+  max-width:238px;
+  margin:0 auto;
+  padding:22px 20px 24px;
+  background:#fff;
+  border-radius:4px;
+  box-shadow:0 3px 25px rgba(0,0,0,.075);
+}
+.verify-input{
+  display:block;
+  width:100%;
+  height:43px;
+  margin:0 0 21px;
+  padding:0 19px;
+  border:0;
+  border-radius:0;
+  outline:0;
+  background:#f6f6f6;
+  color:#666;
+  font-size:12px;
+  font-weight:400;
+}
+.verify-input::placeholder{color:#777;opacity:1}
+.verify-input:focus{
+  border:0;
+  outline:0;
+  background:#f6f6f6;
+}
+.btn-verify{
+  display:block;
+  width:108px;
+  height:43px;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:25px;
+  background:#096897;
+  color:#fff;
+  font-size:12px;
+  font-weight:400;
+  line-height:43px;
+  text-align:center;
+  cursor:pointer;
+  transition:none;
+}
+.btn-verify:hover,
+.btn-verify:focus{
+  background:#096897;
+  color:#fff;
+}
+.btn-verify:disabled{
+  background:#096897;
+  color:#fff;
+  opacity:.75;
+}
 
-  /* Hero */
-  .hero {
-    position: relative;
-    height: 360px;
-    background:
-      linear-gradient(rgba(10,20,40,0.5), rgba(10,20,40,0.5)),
-      url("/static/hero.jpg");
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero h1 {
-    color: #fff;
-    font-size: 46px;
-    font-weight: 400;
-    margin: 0;
-  }
+/* RESULT */
+#result{
+  display:none;
+  margin-top:17px;
+  text-align:left;
+}
+#result.show{display:block}
+.msg-fail{
+  margin:0;
+  padding:0;
+  color:var(--red);
+  font-size:12px;
+  line-height:1.75;
+  font-weight:700;
+  text-align:center;
+}
+.msg-ok{
+  margin:0 0 12px;
+  color:var(--green);
+  font-size:10px;
+  line-height:1.55;
+  font-weight:700;
+  text-align:center;
+}
+.data-label{
+  margin:0 0 3px;
+  padding:0;
+  color:#7a7a7a;
+  font-size:9px;
+  line-height:1.25;
+  letter-spacing:0;
+  text-transform:none;
+  text-align:left;
+  font-weight:400;
+}
+.data-box{
+  width:100%;
+  min-height:30px;
+  margin:0 0 6px;
+  padding:8px 10px;
+  border:1px solid #e5e5e5;
+  border-radius:3px;
+  background:#f4f4f4;
+  color:#333;
+  font-size:9px;
+  line-height:1.25;
+  font-weight:400;
+  text-align:left;
+  overflow-wrap:anywhere;
+}
 
-  /* Verify card */
-  .verify-wrap {
-    max-width: 460px;
-    margin: -50px auto 40px;
-    padding: 0 20px;
-    position: relative;
-  }
-  .verify-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
-    padding: 30px 24px;
-  }
-  .verify-input {
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 15px 16px;
-    width: 100%;
-    font-size: 15px;
-    margin-bottom: 20px;
-  }
-  .verify-input:focus {
-    outline: none;
-    border-color: var(--brand-blue);
-    background: #fff;
-  }
-  .btn-verify {
-    background: var(--brand-blue);
-    border: none;
-    color: #fff;
-    width: 100%;
-    padding: 15px;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .btn-verify:hover { background: var(--brand-blue-dark); color: #fff; }
-  .btn-verify:disabled { background: #9fb8d6; }
+/* FOOTER */
+.site-footer{
+  width:100%;
+  margin:0;
+  padding:58px 10px 24px;
+  background:var(--navy);
+  color:#9aa4b7;
+}
+.footer-inner{
+  width:100%;
+  max-width:238px;
+  margin:0 auto;
+  display:block;
+}
+.footer-col{width:100%}
+.footer-logo-box{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  padding:0;
+  margin:0 0 24px;
+  background:transparent;
+  border-radius:0;
+}
+.footer-logo-box img{
+  display:block;
+  width:190px;
+  height:auto;
+  max-height:70px;
+  object-fit:contain;
+  object-position:left center;
+}
+.footer-about{
+  margin:0 0 22px;
+  color:#929caf;
+  font-size:11px;
+  line-height:1.85;
+  font-weight:400;
+}
+.footer-social{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:0 0 34px;
+}
+.footer-social a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:27px;
+  height:27px;
+  border-radius:1px;
+  background:#101e3e;
+  color:#fff;
+  text-decoration:none;
+  font-size:10px;
+  font-weight:700;
+}
+.footer-col h3{
+  margin:0 0 20px;
+  color:#fff;
+  font-size:18px;
+  line-height:1.2;
+  font-weight:400;
+}
+.footer-links{
+  list-style:none;
+  margin:0 0 39px;
+  padding:0;
+}
+.footer-links li{
+  margin:0 0 9px;
+  padding:0;
+  color:#929caf;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:400;
+}
+.footer-contact-row{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  margin:0 0 14px;
+  color:#929caf;
+  font-size:11px;
+  line-height:1.7;
+  font-weight:400;
+}
+.footer-contact-row .contact-icon{
+  width:17px;
+  flex:0 0 17px;
+  color:#aab3c2;
+  font-size:12px;
+  line-height:1.6;
+  text-align:center;
+}
+.footer-bottom{
+  width:100%;
+  max-width:238px;
+  margin:30px auto 0;
+  padding-top:27px;
+  border-top:1px solid #1d2945;
+  color:#8d97aa;
+  font-size:10px;
+  line-height:1.8;
+  font-weight:400;
+}
+.footer-bottom .designer{
+  display:block;
+  margin-top:5px;
+}
+.back-to-top{
+  position:fixed;
+  right:10px;
+  bottom:10px;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:3px;
+  background:#0870a5;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  line-height:1;
+  box-shadow:none;
+  z-index:10;
+}
 
-  /* Result states */
-  #result { display: none; margin-top: 24px; text-align: center; }
-  #result.show { display: block; }
-
-  .msg-ok {
-    color: var(--ok-green);
-    font-weight: 700;
-    font-size: 15.5px;
-    margin-bottom: 18px;
-    line-height: 1.5;
+@media (min-width:769px){
+  .site-header{padding:0 30px}
+  .site-header img.logo{width:205px}
+  .hero{height:300px;padding-left:10%;background-position:center}
+  .hero h1{font-size:44px}
+  .verify-wrap{
+    min-height:330px;
+    padding-top:44px;
   }
-  .msg-fail {
-    color: var(--error-red);
-    font-weight: 700;
-    font-size: 15.5px;
-    line-height: 1.6;
+  .verify-card{max-width:460px;padding:30px 24px 28px}
+  .verify-input{height:45px;font-size:14px}
+  .btn-verify{height:43px}
+  .footer-inner,
+  .footer-bottom{max-width:1080px}
+  .site-footer{padding-left:24px;padding-right:24px}
+  .footer-inner{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1.2fr;
+    gap:36px;
   }
-
-  .data-label {
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-    color: #9ca3af;
-    margin-bottom: 3px;
-    text-align: left;
-  }
-  .data-box {
-    background: #f9fafb;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    padding: 11px 14px;
-    margin-bottom: 12px;
-    text-align: left;
-    font-size: 14.5px;
-    font-weight: 600;
-  }
-
-  /* Footer */
-  .site-footer {
-    background: var(--brand-blue-dark);
-    color: #b9c6dc;
-    padding: 48px 24px 20px;
-  }
-  .footer-inner {
-    max-width: 1080px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1.2fr;
-    gap: 36px;
-  }
-  .footer-logo-box {
-    background: #fff;
-    display: inline-block;
-    padding: 10px 16px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-  }
-  .footer-logo-box img { height: 40px; display: block; }
-  .footer-about {
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: #a9bcd4;
-    margin-bottom: 18px;
-  }
-  .footer-social { display: flex; gap: 10px; }
-  .footer-social a {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-decoration: none;
-  }
-  .footer-col h3 {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 18px;
-  }
-  .footer-links { list-style: none; padding: 0; margin: 0; }
-  .footer-links li {
-    font-size: 13.5px;
-    padding: 7px 0;
-    color: #cbd8e8;
-  }
-  .footer-contact-row {
-    display: flex;
-    gap: 10px;
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: #cbd8e8;
-    margin-bottom: 14px;
-  }
-  .footer-bottom {
-    max-width: 1080px;
-    margin: 32px auto 0;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.12);
-    font-size: 12.5px;
-    color: #8ea3c0;
-  }
-  .back-to-top {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--brand-blue);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  @media (max-width: 768px) {
-    .footer-inner { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 34px; }
-  }
+}
 </style>
 </head>
 <body>
 
 <div class="site-header">
-  <img src="/static/logo1.png" alt="Standard Arabia" class="logo">
-  <div class="menu-icon"><span></span><span></span><span></span></div>
+  <img src="/static/logo1.png" alt="Standard Arabia Inspection Co. Ltd." class="logo">
+  <div class="menu-icon"><span></span></div>
 </div>
 
 <div class="hero">
@@ -249,7 +375,7 @@
 <div class="verify-wrap">
   <div class="verify-card">
     <form id="verify-form">
-      <input type="text" class="verify-input" id="query" placeholder="Enter Card No, Iqama No, or Name" autocomplete="off" required>
+      <input type="text" class="verify-input" id="query" placeholder="Enter Certificate No. or Stick..." autocomplete="off" required>
       <button type="submit" class="btn-verify" id="verify-btn">Verify</button>
     </form>
 
@@ -260,14 +386,22 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="footer-logo-box"><img src="/static/logo2.png" alt="Standard Arabia"></div>
-      <p class="footer-about">Standard Arabia is a TVTC, Saudi Arabia Approved Training Center accredited by International Agency.</p>
+      <div class="footer-logo-box">
+        <img src="/static/logo2.png" alt="Standard Arabia Inspection Co. Ltd.">
+      </div>
+
+      <p class="footer-about">
+        Standard Arabia is TVTC, Saudi Arabia<br>
+        Approved Training Center accredited by<br>
+        International Agency.
+      </p>
+
       <div class="footer-social">
         <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="Instagram">ig</a>
+        <a href="#" aria-label="Instagram">◎</a>
         <a href="#" aria-label="LinkedIn">in</a>
-        <a href="#" aria-label="YouTube">yt</a>
-        <a href="#" aria-label="Twitter">tw</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="Twitter">♥</a>
       </div>
     </div>
 
@@ -288,18 +422,31 @@
 
     <div class="footer-col">
       <h3>Contact Us</h3>
-      <div class="footer-contact-row">📞 <span>+966-13-3670801<br>+966-53-9461585</span></div>
-      <div class="footer-contact-row">✉️ <span>info@standardarabia.com</span></div>
-      <div class="footer-contact-row">📍 <span>P.O Box 10353, Al Jubail, 31961, Support Industrail Zone, Jubail, Kingdom of Saudi Arabia</span></div>
+      <div class="footer-contact-row">
+        <span class="contact-icon">☎</span>
+        <span>+966-13-3670801<br>+966-53-9461485</span>
+      </div>
+      <div class="footer-contact-row">
+        <span class="contact-icon">✉</span>
+        <span>info@standardarabia.com</span>
+      </div>
+      <div class="footer-contact-row">
+        <span class="contact-icon">●</span>
+        <span>P.O. Box 10353, Al Jubail 31961, Support<br>
+        Industrial Zone, Jubail, Kingdom of<br>
+        Saudi Arabia.</span>
+      </div>
     </div>
   </div>
 
   <div class="footer-bottom">
-    Standard Arabia &amp; Inspection &copy; 2024 / All Rights Reserved / Designed by SoftTech
+    Standard Arabia Inspection Co © 2024 / All<br>
+    Rights Reserved
+    <span class="designer">Designed By BM Softech</span>
   </div>
 </footer>
 
-<a href="#top" class="back-to-top">&uarr;</a>
+<a href="#top" class="back-to-top">⌃</a>
 
 <script>
   const form = document.getElementById('verify-form');
@@ -379,6 +526,5 @@
     return div.innerHTML;
   }
 </script>
-
 </body>
 </html>
