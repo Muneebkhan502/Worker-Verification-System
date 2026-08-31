@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Worker Record{% endblock %}
+{% set active_page = 'workers' %}
+
+{% block content %}
+<a href="/workers" class="text-decoration-none text-muted small">&larr; Workers / Operators</a>
+
+<p class="text-uppercase text-muted small mt-3 mb-1" style="letter-spacing:1px;">Operator Record</p>
+<h1 class="fw-bold mb-2">{{ worker.name }}</h1>
+<p class="mb-4">
+  {% if worker.is_expired %}
+    <span class="badge bg-danger-subtle text-danger">Expired</span>
+  {% elif worker.status.value == 'active' %}
+    <span class="badge bg-success-subtle text-success">Active</span>
+  {% elif worker.status.value == 'suspended' %}
+    <span class="badge bg-warning-subtle text-warning">Suspended</span>
+  {% else %}
+    <span class="badge bg-secondary-subtle text-secondary">Cancelled</span>
+  {% endif %}
+  <span class="text-muted ms-2">Card {{ worker.card_number }}</span>
+</p>
+
+{% if request.query_params.get('created') %}
+<div class="alert alert-success">Worker created successfully.</div>
+{% endif %}
+
+<div class="card border-0 shadow-sm p-4 mb-4" style="max-width:640px;">
+  <p class="text-uppercase text-muted small fw-semibold mb-3">Operator and card information</p>
+  <div class="row g-3">
+    <div class="col-6"><div class="text-muted small text-uppercase">Card Number</div><div class="fw-semibold">{{ worker.card_number }}</div></div>
+    <div class="col-6"><div class="text-muted small text-uppercase">Iqama No</div><div class="fw-semibold">{{ worker.iqama_no }}</div></div>
+    <div class="col-6"><div class="text-muted small text-uppercase">Company</div><div class="fw-semibold">{{ worker.company_name }}</div></div>
+    <div class="col-6"><div class="text-muted small text-uppercase">Trade / Profession</div><div class="fw-semibold">{{ worker.trade_course }}</div></div>
+    <div class="col-6"><div class="text-muted small text-uppercase">Issued Date</div><div class="fw-semibold">{{ worker.issued_date }}</div></div>
+    <div class="col-6"><div class="text-muted small text-uppercase">Expiry Date</div><div class="fw-semibold">{{ worker.expiry_date }}</div></div>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm p-4 mb-4" style="max-width:640px;">
+  <p class="fw-semibold mb-1">Card Verification / QR</p>
+  <p class="text-muted small mb-3">This QR opens the public Verification page.</p>
+
+  <div class="d-flex gap-4 align-items-start flex-wrap">
+    <img src="/qr-code/png" alt="Verification QR code" style="width:130px;height:130px;border:1px solid #eee;border-radius:6px;">
+
+    <div class="flex-grow-1" style="min-width:240px;">
+      <div class="text-muted small text-uppercase mb-1">Card</div>
+      <div class="fw-semibold mb-3">{{ worker.card_number }} - {{ worker.name }}</div>
+
+      <div class="text-muted small text-uppercase mb-1">Verification URL</div>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control form-control-sm" id="verify-url" value="{{ verify_url }}" readonly>
+        <button class="btn btn-outline-secondary btn-sm" onclick="copyVerifyUrl()">Copy</button>
+      </div>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <a href="{{ verify_url }}" target="_blank" class="btn btn-dark btn-sm">Open Verification page</a>
+        <a href="/qr-code/png" download="worker-{{ worker.card_number }}-qr.png" class="btn btn-outline-secondary btn-sm">Download PNG</a>
+        <a href="/qr-code/svg" download="worker-{{ worker.card_number }}-qr.svg" class="btn btn-outline-secondary btn-sm">Download SVG</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex gap-2">
+  <a href="/workers/{{ worker.id }}/edit" class="btn btn-dark">Edit</a>
+  <button class="btn btn-outline-danger delete-btn" data-worker-id="{{ worker.id }}">Delete</button>
+  <a href="/workers" class="btn btn-outline-secondary">Back to list</a>
+</div>
+
+<script>
+function copyVerifyUrl() {
+  const input = document.getElementById('verify-url');
+  input.select();
+  navigator.clipboard.writeText(input.value);
+}
+
+document.querySelector('.delete-btn').addEventListener('click', async function() {
+  if (!confirm('Are you sure you want to delete this worker? This cannot be undone.')) return;
+  const id = this.dataset.workerId;
+  try {
+    const response = await fetch(`/worker/${id}`, { method: 'DELETE' });
+    if (response.ok) {
+      window.location.href = '/workers';
+    } else {
+      alert('Could not delete worker. Please try again.');
+    }
+  } catch (err) {
+    console.error('Delete failed:', err);
+    alert('Something went wrong reaching the server.');
+  }
+});
+</script>
+{% endblock %}

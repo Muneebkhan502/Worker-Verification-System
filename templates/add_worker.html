@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Add Worker{% endblock %}
+{% set active_page = 'workers' %}
+
+{% block content %}
+<p class="text-uppercase text-muted small mb-1" style="letter-spacing:1px;">Operator Directory</p>
+<h2 class="fw-bold mb-4">Add Worker</h2>
+
+<div class="card border-0 shadow-sm p-4" style="max-width:640px;">
+  <form id="add-worker-form">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Name</label>
+        <input type="text" class="form-control" name="name" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Card Number</label>
+        <input type="text" class="form-control" name="card_number" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Iqama No</label>
+        <input type="text" class="form-control" name="iqama_no" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Company</label>
+        <input type="text" class="form-control" name="company_name">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Trade</label>
+        <input type="text" class="form-control" name="trade_course">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Status</label>
+        <select class="form-select" name="status">
+          <option value="active" selected>Active</option>
+          <option value="suspended">Suspended</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Issued Date</label>
+        <input type="date" class="form-control" name="issued_date" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Expiry Date</label>
+        <input type="date" class="form-control" name="expiry_date" required>
+      </div>
+    </div>
+
+    <div id="form-error" class="text-danger small mt-3" style="display:none;"></div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-dark" id="submit-btn">Save Worker</button>
+      <a href="/workers" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<script>
+document.getElementById('add-worker-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('submit-btn');
+  const errorBox = document.getElementById('form-error');
+
+  const payload = Object.fromEntries(new FormData(form).entries());
+
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  errorBox.style.display = 'none';
+
+  try {
+    const response = await fetch('/add_worker', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      const created = await response.json();
+      console.log('Created worker response:', created);
+      if (created && created.id){
+        window.location.href=`/workers/${created.id}/view?created=1`;
+      }
+      
+    } else {
+      const err = await response.json();
+      let message = 'Could not save worker. Check the Fields and try again.';
+      if (typeof err.detail === 'string') {
+        message = err.detail;
+      } else if (Array.isArray(err.detail) && err.detail.length > 0) {
+        message = err.detail[0].msg
+      }
+
+      errorBox.textContent = message;
+      errorBox.style.display = 'block';
+    }
+  } catch (err) {
+    errorBox.textContent = 'Something went wrong reaching the server.';
+    errorBox.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save Worker';
+  }
+});
+</script>
+{% endblock %}

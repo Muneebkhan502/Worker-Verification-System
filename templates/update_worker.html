@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Edit Worker{% endblock %}
+{% set active_page = 'workers' %}
+
+{% block content %}
+<p class="text-uppercase text-muted small mb-1" style="letter-spacing:1px;">Operator Directory</p>
+<h2 class="fw-bold mb-4">Edit Worker</h2>
+
+<div class="card border-0 shadow-sm p-4" style="max-width:640px;">
+  <form id="update-worker-form" data-worker-id="{{ worker.id }}">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Name</label>
+        <input type="text" class="form-control" name="name" value="{{ worker.name }}" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Card Number</label>
+        <input type="text" class="form-control" name="card_number" value="{{ worker.card_number }}" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Iqama No</label>
+        <input type="text" class="form-control" name="iqama_no" value="{{ worker.iqama_no }}" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Company</label>
+        <input type="text" class="form-control" name="company_name" value="{{ worker.company_name }}">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Trade / Profession</label>
+        <input type="text" class="form-control" name="trade_course" value="{{ worker.trade_course }}">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Status</label>
+        <select class="form-select" name="status">
+          <option value="active" {% if worker.status.value == 'active' %}selected{% endif %}>Active</option>
+          <option value="suspended" {% if worker.status.value == 'suspended' %}selected{% endif %}>Suspended</option>
+          <option value="cancelled" {% if worker.status.value == 'cancelled' %}selected{% endif %}>Cancelled</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Issued Date</label>
+        <input type="date" class="form-control" name="issued_date" value="{{ worker.issued_date }}" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">Expiry Date</label>
+        <input type="date" class="form-control" name="expiry_date" value="{{ worker.expiry_date }}" required>
+      </div>
+    </div>
+
+    <div id="form-error" class="text-danger small mt-3" style="display:none;"></div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-dark" id="submit-btn">Save Changes</button>
+      <a href="/workers" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<script>
+document.getElementById('update-worker-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const workerId = form.dataset.workerId;
+  const btn = document.getElementById('submit-btn');
+  const errorBox = document.getElementById('form-error');
+
+  const payload = Object.fromEntries(new FormData(form).entries());
+
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  errorBox.style.display = 'none';
+
+  try {
+    const response = await fetch(`/update/${workerId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      window.location.href = '/workers';
+    } else {
+      const err = await response.json();
+      let message = 'Could not save worker. Check the Fields and try again.';
+      if (typeof err.detail === 'string') {
+        message = err.detail;
+      } else if (Array.isArray(err.detail) && err.detail.length > 0) {
+        message = err.detail[0].msg
+      }
+      errorBox.textContent = message;
+      errorBox.style.display = 'block';
+    }
+  } catch (err) {
+    console.error('Fetch failed:', err);
+    errorBox.textContent = 'Something went wrong reaching the server.';
+    errorBox.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save Changes';
+  }
+});
+</script>
+{% endblock %}

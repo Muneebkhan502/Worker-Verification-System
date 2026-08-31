@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% set active_page = 'dashboard' %}
+
+{% block content %}
+<p class="text-uppercase text-muted small mb-1" style="letter-spacing:1px;">Operations Overview</p>
+<h2 class="fw-bold mb-1">Dashboard</h2>
+<p class="text-muted mb-4">Current operator and card status across the Tove Leeds verification system.</p>
+
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm p-3 h-100">
+      <div class="d-flex justify-content-between">
+        <span class="fw-semibold">Total Workers</span>
+        <a href="/workers" class="badge bg-light text-dark text-decoration-none">CARDS</a>
+      </div>
+      <p class="text-muted small mb-2">All registered operators</p>
+      <h1 class="fw-bold">{{ total_workers if total_workers is defined else '—' }}</h1>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm p-3 h-100">
+      <div class="d-flex justify-content-between">
+        <span class="fw-semibold">Active</span>
+        <a href="/workers?status=active" class="badge bg-light text-dark text-decoration-none">CARDS</a>
+      </div>
+      <p class="text-muted small mb-2">Currently valid cards</p>
+      <h1 class="fw-bold">{{ active_count if active_count is defined else '—' }}</h1>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm p-3 h-100">
+      <div class="d-flex justify-content-between">
+        <span class="fw-semibold">Expired</span>
+        <a href="/workers?status=expired" class="badge bg-light text-dark text-decoration-none">CARDS</a>
+      </div>
+      <p class="text-muted small mb-2">Past their expiry date</p>
+      <h1 class="fw-bold">{{ expired_count if expired_count is defined else '—' }}</h1>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm p-3 h-100">
+      <div class="d-flex justify-content-between">
+        <span class="fw-semibold">Suspended</span>
+        <a href="/workers?status=suspended" class="badge bg-light text-dark text-decoration-none">CARDS</a>
+      </div>
+      <p class="text-muted small mb-2">Temporarily unavailable</p>
+      <h1 class="fw-bold">{{ suspended_count if suspended_count is defined else '—' }}</h1>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm p-3 h-100">
+      <div class="d-flex justify-content-between">
+        <span class="fw-semibold">Cancelled</span>
+        <a href="/workers?status=cancelled" class="badge bg-light text-dark text-decoration-none">CARDS</a>
+      </div>
+      <p class="text-muted small mb-2">Permanently cancelled</p>
+      <h1 class="fw-bold">{{ cancelled_count if cancelled_count is defined else '—' }}</h1>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm p-3 h-100" style="border: 2px solid var(--brand-blue) !important;">
+      <div class="d-flex justify-content-between">
+        <span class="fw-semibold">Expiring Soon</span>
+        <a href="/workers?status=expiring_soon" class="badge bg-light text-dark text-decoration-none">CARDS</a>
+      </div>
+      <p class="text-muted small mb-2">Due within 30 days</p>
+      <h1 class="fw-bold">{{ expiring_soon_count if expiring_soon_count is defined else '—' }}</h1>
+    </div>
+  </div>
+</div>
+{% endblock %}

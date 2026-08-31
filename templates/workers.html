@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Workers / Operators{% endblock %}
+{% set active_page = 'workers' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-start mb-4">
+  <div>
+    <p class="text-uppercase text-muted small mb-1" style="letter-spacing:1px;">Operator Directory</p>
+    <h2 class="fw-bold mb-1">Workers / Operators</h2>
+    <p class="text-muted">Manage operator identities, card details, and verification status.</p>
+  </div>
+  <div>
+    <a href="/workers/add" class="btn btn-dark">+ Add Worker</a>
+  </div>
+  
+</div>
+
+<div class="card border-0 shadow-sm p-3 mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-7">
+      <label class="form-label small text-muted fw-semibold">SEARCH OPERATORS</label>
+      <input type="text" id="search-input" class="form-control" placeholder="Name, card, IQAMA, or company">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label small text-muted fw-semibold">CARD STATUS</label>
+      <select id="status-filter" class="form-select">
+        <option value="">All statuses</option>
+        <option value="active">Active</option>
+        <option value="expired">Expired</option>
+        <option value="suspended">Suspended</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-dark w-100" id="search-btn">Search</button>
+    </div>
+  </div>
+</div>
+
+<p class="text-muted small mb-2"><span id="result-count">{{ workers|length if workers is defined else 0 }}</span> results</p>
+
+<div class="card border-0 shadow-sm">
+  <table class="table mb-0 align-middle">
+    <thead>
+      <tr class="text-muted small text-uppercase">
+        <th>Card Number</th>
+        <th>Worker</th>
+        <th>Iqama</th>
+        <th>Company</th>
+        <th>Trade</th>
+        <th>Expiry</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="workers-table-body">
+      {% for w in workers %}
+      <tr>
+        <td class="fw-semibold">{{ w.card_number }}</td>
+        <td>{{ w.name }}</td>
+        <td>{{ w.iqama_no }}</td>
+        <td>{{ w.company_name }}</td>
+        <td>{{ w.trade_course }}</td>
+        <td>{{ w.expiry_date }}</td>
+        <td>
+          {% if w.status.value == 'active' %}
+            <span class="badge bg-success-subtle text-success">Active</span>
+          {% elif w.status.value == 'suspended' %}
+            <span class="badge bg-warning-subtle text-warning">Suspended</span>
+          {% elif w.status.value == 'cancelled' %}
+            <span class="badge bg-secondary-subtle text-secondary">Cancelled</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="/workers/{{ w.id }}/view" class="text-decoration-none me-2">View</a>
+          <a href="/workers/{{w.id}}/edit" class="text-decoration-none">Edit</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8" class="text-center text-muted py-4">No workers found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script>
+document.getElementById('search-btn').addEventListener('click', async () => {
+  const q = document.getElementById('search-input').value.trim();
+  const status = document.getElementById('status-filter').value;
+
+  const params = new URLSearchParams();
+  if (q) params.append('q', q);
+  if (status) params.append('status', status);
+
+  const response = await fetch(`/workers/search?${params.toString()}`);
+  const workers = await response.json();
+
+  renderTable(workers);
+  document.getElementById('result-count').textContent = workers.length;
+});
+
+function renderTable(workers) {
+  const tbody = document.getElementById('workers-table-body');
+  if (workers.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted py-4">No workers found.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = workers.map(w => `
+    <tr>
+      <td class="fw-semibold">${w.card_number}</td>
+      <td>${w.name}</td>
+      <td>${w.iqama_no}</td>
+      <td>${w.company_name}</td>
+      <td>${w.trade_course}</td>
+      <td>${w.expiry_date}</td>
+      <td>${w.status === 'active' ? '<span class="badge bg-success-subtle text-success">Active</span>' : `<span class="badge bg-danger-subtle text-danger">${w.status}</span>`}</td>
+      <td><a href="/workers/${w.id}" class="text-decoration-none me-2">View</a><a href="/workers/${w.id}/edit" class="text-decoration-none">Edit</a></td>
+    </tr>
+  `).join('');
+}
+</script>
+{% endblock %}
