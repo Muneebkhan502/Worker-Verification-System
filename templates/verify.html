@@ -46,7 +46,7 @@
     position: relative;
     height: 220px;
     background: linear-gradient(rgba(10,25,45,0.55), rgba(10,25,45,0.55)),
-                url("/static/images/hero.jpg");
+                linear-gradient(135deg, #1b3a5c, #14549c 60%, #2c74b3);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -137,6 +137,84 @@
     font-size: 14.5px;
     font-weight: 500;
   }
+
+  /* Footer */
+  .site-footer {
+    background: var(--brand-blue-dark);
+    color: #cbd8e8;
+    margin-top: 40px;
+    padding: 48px 24px 20px;
+  }
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr;
+    gap: 32px;
+  }
+  .footer-col h3 {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  .footer-logo {
+    font-weight: 700;
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .footer-about {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #a9bcd4;
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    font-size: 13.5px;
+    padding: 6px 0;
+    color: #cbd8e8;
+  }
+  .footer-contact {
+    font-size: 13.5px;
+    line-height: 2;
+    color: #cbd8e8;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .footer-social a {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .footer-bottom {
+    max-width: 1080px;
+    margin: 32px auto 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 12.5px;
+    color: #8ea3c0;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .footer-inner { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -159,6 +237,43 @@
     <div id="result"></div>
   </div>
 </div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-logo">TOVE LEEDS</div>
+      <p class="footer-about">Tove Leeds is a certification and inspection provider, verifying worker and operator credentials for sites and contractors.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Instagram">ig</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>Services</h3>
+      <ul class="footer-links">
+        <li>Worker &amp; Operator Certification</li>
+        <li>Card Verification</li>
+        <li>Site Inspection</li>
+        <li>Compliance Documentation</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>Contact Us</h3>
+      <div class="footer-contact">
+        +XX-XXX-XXXXXXX<br>
+        info@toveleeds.com<br>
+        Your company address, city, country
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    Tove Leeds Certification &amp; Inspection &copy; 2026 / All Rights Reserved
+  </div>
+</footer>
 
 <script>
   const form = document.getElementById('verify-form');
@@ -207,7 +322,7 @@
 
   function renderVerified(w) {
     resultBox.innerHTML = `
-      <div class="msg-ok">Tove Leeds confirms below worker / operator is verified.</div>
+      <div class="msg-ok">Tove Leeds confirms below worker / operator is verified and active on record.</div>
       <div class="data-label">Name</div>
       <div class="data-box">${escapeHtml(w.name ?? '—')}</div>
       <div class="data-label">Iqama No / ID</div>
@@ -215,11 +330,9 @@
       <div class="data-label">Card No</div>
       <div class="data-box">${escapeHtml(w.card_number ?? '—')}</div>
       <div class="data-label">Company</div>
-      <div class="data-box">${escapeHtml(w.company_name ?? '—')}</div>
+      <div class="data-box">${escapeHtml(w.company ?? '—')}</div>
       <div class="data-label">Trade</div>
-      <div class="data-box">${escapeHtml(w.trade_course ?? '—')}</div>
-      <div class="data-label">Issued Date</div>
-      <div class="data-box">${escapeHtml(w.issued_date ?? '—')}</div>
+      <div class="data-box">${escapeHtml(w.trade ?? '—')}</div>
       <div class="data-label">Expiry Date</div>
       <div class="data-box">${escapeHtml(w.expiry_date ?? '—')}</div>
     `;
