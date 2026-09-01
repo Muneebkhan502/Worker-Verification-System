@@ -95,13 +95,17 @@
     background: var(--brand-blue);
     border: none;
     color: #fff;
-    width: 100%;
-    padding: 16px;
+    width: 56%;
+    max-width: 154px;
+    min-width: 145px;
+    padding: 16px 24px;
     border-radius: 30px;
     font-size: clamp(16px, 4.2vw, 18px);
     font-weight: 700;
     cursor: pointer;
     transition: background 0.15s;
+    display: block;
+    margin: 0;
   }
   .btn-verify:hover { background: var(--brand-blue-dark); color: #fff; }
   .btn-verify:disabled { background: #9fb8d6; }
@@ -114,8 +118,9 @@
     color: var(--ok-green);
     font-weight: 700;
     font-size: 15.5px;
-    margin-bottom: 18px;
+    margin: 25px 4px 20px;
     line-height: 1.5;
+    text-align: center;
   }
   .msg-fail {
     color: var(--error-red);
@@ -124,23 +129,86 @@
     line-height: 1.6;
   }
 
-  .data-label {
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-    color: #9ca3af;
-    margin-bottom: 3px;
+  .verification-data-title {
+    color: #8d8d8d;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0 0 10px;
     text-align: left;
   }
-  .data-box {
-    background: #f9fafb;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    padding: 11px 14px;
-    margin-bottom: 12px;
+  .verification-summary {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 0 0 22px;
     text-align: left;
-    font-size: 14.5px;
-    font-weight: 600;
+  }
+  .verification-summary td {
+    width: 33.333%;
+    padding: 0 7px 11px 0;
+    vertical-align: top;
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+  .verification-summary td:last-child {
+    padding-right: 0;
+  }
+  .verification-summary .summary-heading {
+    color: #444;
+    font-weight: 500;
+    padding-bottom: 8px;
+  }
+  .verification-summary .summary-value {
+    color: #5c5c5c;
+    font-weight: 400;
+    padding-bottom: 0;
+  }
+
+  .data-label {
+    text-transform: none;
+    font-size: 14px;
+    letter-spacing: 0;
+    color: #666;
+    background: #f1f1f1;
+    border: 1px solid #dcdcdc;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+    margin: 0;
+    padding: 10px 14px;
+    text-align: left;
+    line-height: 1.25;
+  }
+  .data-box {
+    position: relative;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 0 0 5px 5px;
+    padding: 13px 14px;
+    margin: 0 0 12px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.35;
+    min-height: 46px;
+  }
+
+  @media (max-width: 480px) {
+    .btn-verify {
+      width: 56%;
+      min-width: 145px;
+      max-width: 154px;
+    }
+    .verification-summary td {
+      font-size: 13.5px;
+      padding-right: 5px;
+    }
+    .verification-summary {
+      margin-bottom: 20px;
+    }
   }
 
   /* Footer */
@@ -268,7 +336,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="footer-logo-box"><img src="/static/images/logo2.png" alt="Standard Arabia"></div>
+      <div class="footer-logo-box"><img src="/static/images/brand_logo.jpeg" alt="Standard Arabia"></div>
       <p class="footer-about">Standard Arabia is a TVTC, Saudi Arabia Approved Training Center accredited by International Agency.</p>
       <div class="footer-social">
         <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -356,20 +424,60 @@
   });
 
   function renderVerified(w) {
+    const name = escapeHtml(w.name ?? '—');
+    const iqama = escapeHtml(w.iqama_no ?? '—');
+    const course = escapeHtml(w.trade ?? w.trade_course ?? '—');
+    const card = escapeHtml(w.card_number ?? '—');
+    const issued = escapeHtml(w.issued_date ?? '—');
+    const expiry = escapeHtml(w.expiry_date ?? '—');
+
     resultBox.innerHTML = `
-      <div class="msg-ok">Standard Arabia confirms this operator / worker card is verified and on record.</div>
+      <div class="msg-ok">Standard Arabia confirms below<br>candidate successfully completed<br>training and certification</div>
+
+      <div class="verification-data-title">Verification Data</div>
+
+      <table class="verification-summary">
+        <tbody>
+          <tr>
+            <td class="summary-heading">Name</td>
+            <td class="summary-heading">IqamaNo/ID</td>
+            <td class="summary-heading">Course Name</td>
+          </tr>
+          <tr>
+            <td class="summary-heading">Card No</td>
+            <td class="summary-heading">Issued Date</td>
+            <td class="summary-heading">Expiry Date</td>
+          </tr>
+          <tr>
+            <td class="summary-value">${name}</td>
+            <td class="summary-value">${iqama}</td>
+            <td class="summary-value">${course}</td>
+          </tr>
+          <tr>
+            <td class="summary-value">${card}</td>
+            <td class="summary-value">${issued}</td>
+            <td class="summary-value">${expiry}</td>
+          </tr>
+        </tbody>
+      </table>
+
       <div class="data-label">Name</div>
-      <div class="data-box">${escapeHtml(w.name ?? '—')}</div>
+      <div class="data-box">${name}</div>
+
       <div class="data-label">IqamaNo/ID</div>
-      <div class="data-box">${escapeHtml(w.iqama_no ?? '—')}</div>
+      <div class="data-box">${iqama}</div>
+
       <div class="data-label">Course Name</div>
-      <div class="data-box">${escapeHtml(w.trade ?? w.trade_course ?? '—')}</div>
+      <div class="data-box">${course}</div>
+
       <div class="data-label">Card No</div>
-      <div class="data-box">${escapeHtml(w.card_number ?? '—')}</div>
+      <div class="data-box">${card}</div>
+
       <div class="data-label">Issued Date</div>
-      <div class="data-box">${escapeHtml(w.issued_date ?? '—')}</div>
+      <div class="data-box">${issued}</div>
+
       <div class="data-label">Expiry Date</div>
-      <div class="data-box">${escapeHtml(w.expiry_date ?? '—')}</div>
+      <div class="data-box">${expiry}</div>
     `;
     resultBox.classList.add('show');
   }
