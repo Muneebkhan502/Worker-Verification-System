@@ -198,11 +198,11 @@
     gap: 36px;
   }
   .footer-logo-box img {
-    height: 80px;
+    height: 120px;
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 0px;
     object-fit: contain;
-    max-width: 220px;
+    max-width: 370px;
   }
   .footer-about {
     font-size: 13.5px;
@@ -296,7 +296,7 @@
 <div class="verify-wrap">
   <div class="verify-card">
     <form id="verify-form">
-      <input type="text" class="verify-input" id="query" placeholder="Enter Card No, Iqama No, or Name" autocomplete="off" required>
+      <input type="text" class="verify-input" id="query" placeholder="Enter Certificate No. or Sticker No." autocomplete="off" required>
       <button type="submit" class="btn-verify" id="verify-btn">Verify</button>
     </form>
 
@@ -397,7 +397,7 @@
   function renderVerified(w) {
     const trade = w.trade ?? w.trade_course ?? '—';
     resultBox.innerHTML = `
-      <div class="msg-ok">Tove Leeds confirms this operator / worker card is verified and on record.</div>
+      <div class="msg-ok">Standard Arabia confirms this operator / worker card is verified and on record.</div>
       <div class="verify-summary-label">Verification Data</div>
       <table class="verify-summary-table">
         <tr>
@@ -439,7 +439,7 @@
 
   function renderNotFound() {
     resultBox.innerHTML = `
-      <div class="msg-fail">Card No, Iqama No, or Name doesn't exist or not validated.</div>
+      <div class="msg-fail">Certificate No. or Sticker No. doesn't exist or not validated.</div>
     `;
     resultBox.classList.add('show');
   }
