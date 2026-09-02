@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 25px 0px;
+    margin: 0px 15px;
     border-bottom: 1px solid #eee;
   }
   .site-header img.logo {
@@ -75,9 +75,10 @@
 
   /* Verify card */
   .verify-wrap {
-    max-width: 460px;
-    margin: -50px auto 40px;
-    padding: 0 20px;
+    max-width: 400px;
+    height: 405px;
+    margin: 20px auto 40px;
+    padding: 60px 0px 65px;
     position: relative;
   }
   .verify-card {
@@ -101,20 +102,20 @@
     background: #fff;
   }
   .btn-verify {
-    background: var(--brand-blue);
+    background: #0c598f;
     border: none;
     color: #fff;
     width: 56%;
-    max-width: 154px;
+    max-width: 150px;
+    height: 60px;
     min-width: 145px;
-    padding: 16px 24px;
-    border-radius: 30px;
-    font-size: clamp(16px, 4.2vw, 18px);
+    padding: 18px 13px;
+    margin: 0px 5px 0px 0px;
+    font: 16px "plus Jakarata Sans", sans-serif;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.15s;
     display: block;
-    margin: 0;
   }
   .btn-verify:hover { background: var(--brand-blue-dark); color: #fff; }
   .btn-verify:disabled { background: #9fb8d6; }
@@ -205,10 +206,11 @@
     max-width: 370px;
   }
   .footer-about {
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: #a9bcd4;
-    margin-bottom: 18px;
+    font: 16px "DM Sans", sans-serif;
+    color: #9CA5AF;
+    margin: 0 0 25px;
+    width: 370px;
+    height: 90px;
   }
   .footer-social { display: flex; gap: 10px; }
   .footer-social a {
@@ -227,9 +229,11 @@
   .footer-social a:hover { background: var(--brand-blue); }
   .footer-col h3 {
     color: #fff;
+    width: 370px;
+    height: 354px;;
     font-size: 16px;
     font-weight: 700;
-    margin-bottom: 18px;
+    margin: 0px 0px 50px;
   }
   .footer-links { list-style: none; padding: 0; margin: 0; }
   .footer-links li {
