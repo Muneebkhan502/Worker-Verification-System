@@ -28,10 +28,14 @@
             font-weight: 700 !important;
             letter-spacing: 1px;
         }
-
+        .site-header img.logo {
+        height: 50px;
+        max-width: 300px;
+        object-fit: contain;
+    }
         /* Form & Button Fixes */
         .verify-input-box {
-            background: #F8F8F8;
+            background: rgba(248,248,248);
             border: 1px solid #d8dce1;
             border-radius: 8px;
             padding: 18px 25px;
@@ -43,8 +47,9 @@
         }
         .verify-input-box:focus {
             outline: none;
+            font-weight: 400;
             border-color: #155b8c;
-            background: #fff;
+            background: rgba(248, 248, 248);
             box-shadow: 0 0 5px rgba(21, 91, 140, 0.2);
         }
         .btn-verify {
@@ -88,10 +93,17 @@
             gap: 12px;
         }
         .msg-ok {
-            background-color: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
+            color: #1b7a37;
+            font-weight: 700;
+            font-size: 19px;
+            text-align: center;
+            line-height: 1.5;
+            margin: 20px 0;
+            background: none;
+            border: none;
+            padding: 0;
         }
+
         .msg-fail {
             background-color: #fef08a;
             color: #854d0e;
@@ -99,38 +111,41 @@
         }
 
         /* Desktop Table View */
-        .desktop-table-view { display: none; }
-        @media (min-width: 768px) {
-            .desktop-table-view { display: block; }
-            .mobile-box-view { display: none; }
-            .verify-input-box { margin-bottom: 0; }
+        .desktop-table-view {
+            display: block;
+            margin-bottom: 16px;
         }
         
         .verify-summary-table {
             width: 100%;
             border-collapse: collapse;
-            background: #fff;
+            /* background: #fff;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border: 1px solid #f1f5f9;
-        }
-        .verify-summary-table th, .verify-summary-table td {
-            padding: 16px 20px;
-            border-bottom: 1px solid #f1f5f9;
-            text-align: left;
+            overflow: hidden; */
+            /* box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9; */ 
         }
         .verify-summary-table th {
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+            padding: 4px 6px 4px 0;
+        }
+        
+        /* .verify-summary-table th {
             font-size: 14px;
             font-weight: 700;
             color: #64748b;
             background: #f8fafc;
-            text-transform: uppercase;
-        }
-        .verify-summary-table td {
-            font-size: 16px;
-            font-weight: 600;
-            color: #0f172a;
+            text-transform: uppercase; */
+        /* } */
+       .verify-summary-table td {
+            text-align: left;
+            font-weight: 400;
+            color: #333;
+            font-size: 15px;
+            padding: 4px 6px 10px 0;
         }
 
         /* Exact Mobile UI Boxes */
@@ -144,18 +159,24 @@
             padding: 18px;
             margin-bottom: 15px;
         }
+        .data-group {
+            border: 1px solid #e2e2e2;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
         .data-label {
-            font-size: 12px;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
+            background: #f2f2f2;
+            color: #8a8a8a;
+            font-size: 14px;
+            padding: 10px 14px;
         }
         .data-value {
-            font-size: 16px;
-            color: #0f172a;
-            font-weight: 700;
+            background: #ffffff;
+            color: #1a1a1a;
+            font-size: 19px;
+            font-weight: 400;
+            padding: 12px 14px;
         }
 
         /* Footer Adjustments */
@@ -236,7 +257,7 @@
                     <div class="col-lg-3 col-md-4 col-8">
                         <div class="tp-header-logo">
                             <a href="/">
-                                <img src="/static/images/logo1.webp" alt="Standard Arabia" style="max-height: 60px;">
+                                <img src="/static/images/logo1.webp" alt="Standard Arabia" style="max-height: 60px; width: 303px;">
                             </a>
                         </div>
                     </div>
@@ -340,15 +361,15 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
                     <h4 class="footer-heading">Training Programs</h4>
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding-bottom: 12px;">IPAF Approved Training Program</li>
-                        <li style="padding-bottom: 12px;">IADC Approved Training Program</li>
-                        <li style="padding-bottom: 12px;">OSHA Approved Training Program</li>
-                        <li style="padding-bottom: 12px;">NEBOSH Approved Training Program</li>
-                        <li style="padding-bottom: 12px;">TVTC Approved Training Program</li>
-                        <li style="padding-bottom: 12px;">Rigging & Lifting Training Program</li>
-                        <li style="padding-bottom: 12px;">First Aid & BLS Training Program</li>
-                        <li style="padding-bottom: 12px;">IOSH Approved Training Program</li>
-                        <li style="padding-bottom: 12px;">PASMA Approved Training Program</li>
+                        <li style="padding-bottom: 8px;">IPAF Approved Training Program</li>
+                        <li style="padding-bottom: 8px;">IADC Approved Training Program</li>
+                        <li style="padding-bottom: 8px;">OSHA Approved Training Program</li>
+                        <li style="padding-bottom: 8px;">NEBOSH Approved Training Program</li>
+                        <li style="padding-bottom: 8px;">TVTC Approved Training Program</li>
+                        <li style="padding-bottom: 8px;">Rigging & Lifting Training Program</li>
+                        <li style="padding-bottom: 8px;">First Aid & BLS Training Program</li>
+                        <li style="padding-bottom: 8px;">IOSH Approved Training Program</li>
+                        <li style="padding-bottom: 8px;">PASMA Approved Training Program</li>
                     </ul>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 mb-50">
