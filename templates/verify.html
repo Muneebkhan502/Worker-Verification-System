@@ -428,79 +428,79 @@
             }
         });
 
-            function renderVerified(w) {
-            const trade = w.trade ?? w.trade_course ?? '—';
-            resultBox.innerHTML = `
-                <div class="msg-ok">
-                    Standard Arabia confirms below candidate successfully completed training and certification
-                </div>
-                
-                <!-- Desktop Table View -->
-                <div class="desktop-table-view">
-                    <div style="color: #666; font-size: 16px; margin-bottom: 10px;">Verification Data</div>
-                    <table class="verify-summary-table">
-                        <tr>
-                            <th>Name</th>
-                            <th>IqamaNo/ID</th>
-                            <th>Course Name</th>
-                        </tr>
-                        <tr>
-                            <td>${escapeHtml(w.name ?? '—')}</td>
-                            <td>${escapeHtml(w.iqama_no ?? '—')}</td>
-                            <td>${escapeHtml(trade)}</td>
-                        </tr>
-                        <tr>
-                            <th>Card No</th>
-                            <th>Issued Date</th>
-                            <th>Expiry Date</th>
-                        </tr>
-                        <tr>
-                            <td>${escapeHtml(w.card_number ?? '—')}</td>
-                            <td>${escapeHtml(w.issued_date ?? '—')}</td>
-                            <td>${escapeHtml(w.expiry_date ?? '—')}</td>
-                        </tr>
-                    </table>
-                </div>
+        function renderVerified(w) {
+        const trade = w.trade ?? w.trade_course ?? '—';
+        resultBox.innerHTML = `
+            <div class="msg-ok">
+                Standard Arabia confirms below candidate successfully completed training and certification
+            </div>
+            
+            <!-- Desktop Table View -->
+            <div class="desktop-table-view">
+                <div style="color: #666; font-size: 16px; margin-bottom: 10px;">Verification Data</div>
+                <table class="verify-summary-table">
+                    <tr>
+                        <th>Name</th>
+                        <th>IqamaNo/ID</th>
+                        <th>Course Name</th>
+                    </tr>
+                    <tr>
+                        <td>${escapeHtml(w.name ?? '—')}</td>
+                        <td>${escapeHtml(w.iqama_no ?? '—')}</td>
+                        <td>${escapeHtml(trade)}</td>
+                    </tr>
+                    <tr>
+                        <th>Card No</th>
+                        <th>Issued Date</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                    <tr>
+                        <td>${escapeHtml(w.card_number ?? '—')}</td>
+                        <td>${escapeHtml(w.issued_date ?? '—')}</td>
+                        <td>${escapeHtml(w.expiry_date ?? '—')}</td>
+                    </tr>
+                </table>
+            </div>
 
-                <!-- Exact Mobile Box View -->
-                <div class="mobile-box-view mt-3">
-                    <div class="data-group">
-                        <div class="data-label">Name</div>
-                        <div class="data-value">${escapeHtml(w.name ?? '—')}</div>
-                    </div>
-                    <div class="data-group">
-                        <div class="data-label">IqamaNo/ID</div>
-                        <div class="data-value">${escapeHtml(w.iqama_no ?? '—')}</div>
-                    </div>
-                    <div class="data-group">
-                        <div class="data-label">Course Name</div>
-                        <div class="data-value">${escapeHtml(trade)}</div>
-                    </div>
-                    <div class="data-group">
-                        <div class="data-label">Card No</div>
-                        <div class="data-value">${escapeHtml(w.card_number ?? '—')}</div>
-                    </div>
-                    <div class="data-group">
-                        <div class="data-label">Issued Date</div>
-                        <div class="data-value">${escapeHtml(w.issued_date ?? '—')}</div>
-                    </div>
-                    <div class="data-group">
-                        <div class="data-label">Expiry Date</div>
-                        <div class="data-value">${escapeHtml(w.expiry_date ?? '—')}</div>
-                    </div>
+            <!-- Exact Mobile Box View -->
+            <div class="mobile-box-view mt-3">
+                <div class="data-group">
+                    <div class="data-label">Name</div>
+                    <div class="data-value">${escapeHtml(w.name ?? '—')}</div>
                 </div>
-            `;
-            resultBox.classList.add('show');
-        }
+                <div class="data-group">
+                    <div class="data-label">IqamaNo/ID</div>
+                    <div class="data-value">${escapeHtml(w.iqama_no ?? '—')}</div>
+                </div>
+                <div class="data-group">
+                    <div class="data-label">Course Name</div>
+                    <div class="data-value">${escapeHtml(trade)}</div>
+                </div>
+                <div class="data-group">
+                    <div class="data-label">Card No</div>
+                    <div class="data-value">${escapeHtml(w.card_number ?? '—')}</div>
+                </div>
+                <div class="data-group">
+                    <div class="data-label">Issued Date</div>
+                    <div class="data-value">${escapeHtml(w.issued_date ?? '—')}</div>
+                </div>
+                <div class="data-group">
+                    <div class="data-label">Expiry Date</div>
+                    <div class="data-value">${escapeHtml(w.expiry_date ?? '—')}</div>
+                </div>
+            </div>
+        `;
+        resultBox.classList.add('show');
+    }
 
-        function renderNotFound() {
-            resultBox.innerHTML = `
-                <div class="msg-fail">
-                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 20px;"></i> 
-                    Certificate No. or Sticker No. doesn't exist or not validated.
-                </div>
-            `;
-            resultBox.classList.add('show');
+    function renderNotFound() {
+        resultBox.innerHTML = `
+            <div class="msg-fail">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 20px;"></i> 
+                Certificate No. or Sticker No. doesn't exist or not validated.
+            </div>
+        `;
+        resultBox.classList.add('show');
         }
 
         function escapeHtml(str) {
