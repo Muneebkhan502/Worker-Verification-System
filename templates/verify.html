@@ -1,459 +1,411 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verification | Standard Arabia</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  :root {
-    --brand-blue: #155b8c;
-    --brand-blue-dark: #0e162d;
-    --ok-green: #2e7d32;
-    --error-red: #c62828;
-  }
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Verification | Standard Arabia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.webp">
 
-  * { box-sizing: border-box; }
+    <!-- CSS (Original Site CSS required for exact design) -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/font-awesome-pro.css">
+    <link rel="stylesheet" href="/static/css/flaticon_ishpat.css">
+    <link rel="stylesheet" href="/static/css/spacing.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  body {
-    margin: 0;
-    background: #fff;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #333;
-  }
+    <!-- Custom CSS for Verification Results (Merged from your code) -->
+    <style>
+        #result { display: none; margin-top: 30px; text-align: left; }
+        #result.show { display: block; animation: fadeIn 0.5s; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  /* Header */
-  .site-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0px 15px;
-    border-bottom: 1px solid #eee;
-  }
-  .site-header img.logo {
-    height: clamp(50px);
-    max-width: 300px;
-    object-fit: contain;
-  }
-  .menu-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-    cursor: pointer;
-  }
-  .menu-icon span {
-    display: block;
-    height: 2px;
-    background: var(--brand-blue);
-  }
-  .menu-icon span:first-child { width: 20px; }
-  .menu-icon span:last-child { width: 30px; }
-
-  /* Hero */
-  .hero {
-    position: relative;
-    min-height: 242px;
-    height: 38vw;
-    max-height: 400px;
-    background:
-      linear-gradient(rgba(10,20,40,0.5), rgba(10,20,40,0.5)),
-      url("/static/images/hero.png");
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero h1 {
-    color: #fff;
-    font-size: clamp(32px, 7.5vw, 52px);
-    font-weight: 500;
-    margin: 0;
-    text-align: center;
-  }
-
-  /* Verify card */
-  .verify-wrap {
-    max-width: 400px;
-    height: 405px;
-    margin: 20px auto 40px;
-    padding: 60px 0px 65px;
-    position: relative;
-  }
-  .verify-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
-    padding: 30px 24px;
-  }
-  .verify-input {
-    background: #edeff2;
-    border: 1px solid #d8dce1;
-    border-radius: 8px;
-    padding: 16px 18px;
-    width: 100%;
-    font-size: clamp(15px, 4vw, 17px);
-    margin-bottom: 22px;
-  }
-  .verify-input:focus {
-    outline: none;
-    border-color: var(--brand-blue);
-    background: #fff;
-  }
-  .btn-verify {
-    background: #0c598f;
-    border: none;
-    color: #fff;
-    width: 56%;
-    max-width: 150px;
-    height: 60px;
-    min-width: 145px;
-    padding: 18px 13px;
-    margin: 0px 5px 0px 0px;
-    font: 16px "plus Jakarata Sans", sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.15s;
-    display: block;
-  }
-  .btn-verify:hover { background: var(--brand-blue-dark); color: #fff; }
-  .btn-verify:disabled { background: #9fb8d6; }
-
-
-  /* Result states */
-  #result { display: none; margin-top: 24px; text-align: center; }
-  #result.show { display: block; }
-
-  .msg-ok {
-    color: var(--ok-green);
-    font-weight: 700;
-    font-size: 15.5px;
-    margin-bottom: 18px;
-    line-height: 1.5;
-  }
-  .msg-fail {
-    color: var(--error-red);
-    font-weight: 700;
-    font-size: 15.5px;
-    line-height: 1.6;
-  }
-
-  .verify-summary-label {
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-    color: #9ca3af;
-    margin-bottom: 8px;
-    text-align: left;
-  }
-  .verify-summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  .verify-summary-table th {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #1a1a1a;
-    padding: 4px 6px 4px 0;
-  }
-  .verify-summary-table td {
-    font-size: 13.5px;
-    font-weight: 400;
-    color: #4b5563;
-    padding: 2px 6px 10px 0;
-  }
-
-  .data-label {
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-    color: #9ca3af;
-    margin-bottom: 3px;
-    text-align: left;
-  }
-  .data-box {
-    background: #f9fafb;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    padding: 11px 14px;
-    margin-bottom: 12px;
-    text-align: left;
-    font-size: 14.5px;
-    font-weight: 600;
-  }
-
-  /* Footer */
-  .site-footer {
-    background: var(--brand-blue-dark);
-    color: #b9c6dc;
-    padding: 48px 24px 20px;
-  }
-  .footer-inner {
-    max-width: 1080px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1.2fr;
-    gap: 36px;
-  }
-  .footer-logo-box img {
-    height: 120px;
-    display: block;
-    margin-bottom: 0px;
-    object-fit: contain;
-    max-width: 370px;
-  }
-  .footer-about {
-    font: 16px "DM Sans", sans-serif;
-    color: #9CA5AF;
-    margin: 0 0 25px;
-    width: 370px;
-    height: 90px;
-  }
-  .footer-social { display: flex; gap: 10px; }
-  .footer-social a {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-decoration: none;
-    font-size: 15px;
-    transition: background 0.15s;
-  }
-  .footer-social a:hover { background: var(--brand-blue); }
-  .footer-col h3 {
-    color: #fff;
-    width: 370px;
-    height: 354px;;
-    font-size: 16px;
-    font-weight: 700;
-    margin: 0px 0px 50px;
-  }
-  .footer-links { list-style: none; padding: 0; margin: 0; }
-  .footer-links li {
-    font-size: 13.5px;
-    padding: 7px 0;
-    color: #cbd8e8;
-  }
-  .footer-contact-row {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #cbd8e8;
-    margin-bottom: 16px;
-  }
-  .footer-contact-row i {
-    color: var(--brand-blue);
-    font-size: 15px;
-    margin-top: 3px;
-    width: 16px;
-  }
-  .footer-bottom {
-    max-width: 1080px;
-    margin: 32px auto 0;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.12);
-    font-size: 12.5px;
-    color: #8ea3c0;
-  }
-  .back-to-top {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--brand-blue);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  @media (max-width: 768px) {
-    .footer-inner { grid-template-columns: 1fr; }
-  }
-</style>
-</head>
-<body>
-
-<div class="site-header">
-  <img src="/static/images/logo1.png" alt="Standard Arabia" class="logo">
-  <div class="menu-icon"><span></span><span></span></div>
-</div>
-
-<div class="hero">
-  <h1>Verification</h1>
-</div>
-
-<div class="verify-wrap">
-  <div class="verify-card">
-    <form id="verify-form">
-      <input type="text" class="verify-input" id="query" placeholder="Enter Certificate No. or Sticker No." autocomplete="off" required>
-      <button type="submit" class="btn-verify" id="verify-btn">Verify</button>
-    </form>
-
-    <div id="result"></div>
-  </div>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-col">
-      <div class="footer-logo-box"><img src="/static/images/brand_logo.png" alt="Standard Arabia"></div>
-      <p class="footer-about">Standard Arabia is a TVTC, Saudi Arabia Approved Training Center accredited by International Agency.</p>
-      <div class="footer-social">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h3>Training Programs</h3>
-      <ul class="footer-links">
-        <li>IPAF Approved Training Program</li>
-        <li>IADC Approved Training Program</li>
-        <li>OSHA Approved Training Program</li>
-        <li>NEBOSH Approved Training Program</li>
-        <li>TVTC Approved Training Program</li>
-        <li>Rigging &amp; Lifting Training Program</li>
-        <li>First Aid &amp; BLS Training Program</li>
-        <li>IOSH Approved Training Program</li>
-        <li>PASMA Approved Training Program</li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h3>Contact Us</h3>
-      <div class="footer-contact-row"><i class="fa-solid fa-phone"></i><span>+966-13-3670801<br>+966-53-9461485</span></div>
-      <div class="footer-contact-row"><i class="fa-solid fa-envelope"></i><span>info@standardarabia.com</span></div>
-      <div class="footer-contact-row"><i class="fa-solid fa-location-dot"></i><span>P.O. Box 10353, Al Jubail 31961, Support Industrial Zone, Jubail, Kingdom of Saudi Arabia</span></div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    Standard Arabia Certification &amp; Inspection &copy; 2026 / All Rights Reserved
-  </div>
-</footer>
-
-<a href="#top" class="back-to-top"><i class="fa-solid fa-chevron-up"></i></a>
-
-<script>
-  const form = document.getElementById('verify-form');
-  const input = document.getElementById('query');
-  const button = document.getElementById('verify-btn');
-  const resultBox = document.getElementById('result');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const value = input.value.trim();
-    if (!value) return;
-
-    button.disabled = true;
-    button.textContent = 'Checking...';
-    resultBox.classList.remove('show');
-
-    try {
-      const params = new URLSearchParams({
-        name: value,
-        card_number: value,
-        iqama_no: value
-      });
-
-      const response = await fetch(`/verify?${params.toString()}`);
-
-      if (response.status === 404) {
-        renderNotFound();
-      } else if (response.ok) {
-        const data = await response.json();
-        const worker = Array.isArray(data) ? data[0] : data;
-        if (!worker) {
-          renderNotFound();
-        } else {
-          renderVerified(worker);
+        .msg-ok {
+            color: #2e7d32;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 20px;
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2e7d32;
         }
-      } else {
-        renderNotFound();
-      }
-    } catch (err) {
-      console.error('Verify request failed:', err);
-      renderNotFound();
-    } finally {
-      button.disabled = false;
-      button.textContent = 'Verify';
-    }
-  });
+        .msg-fail {
+            background: #FFF3CD;
+            color: #856404;
+            font-size: 16px;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffeeba;
+        }
 
-  function renderVerified(w) {
-    const trade = w.trade ?? w.trade_course ?? '—';
-    resultBox.innerHTML = `
-      <div class="msg-ok">Standard Arabia confirms this operator / worker card is verified and on record.</div>
-      <div class="verify-summary-label">Verification Data</div>
-      <table class="verify-summary-table">
-        <tr>
-          <th>Name</th>
-          <th>Iqama No/ID</th>
-          <th>Trade</th>
-        </tr>
-        <tr>
-          <td>${escapeHtml(w.name ?? '—')}</td>
-          <td>${escapeHtml(w.iqama_no ?? '—')}</td>
-          <td>${escapeHtml(trade)}</td>
-        </tr>
-        <tr>
-          <th>Card No</th>
-          <th>Issued Date</th>
-          <th>Expiry Date</th>
-        </tr>
-        <tr>
-          <td>${escapeHtml(w.card_number ?? '—')}</td>
-          <td>${escapeHtml(w.issued_date ?? '—')}</td>
-          <td>${escapeHtml(w.expiry_date ?? '—')}</td>
-        </tr>
-      </table>
-      <div class="data-label">Name</div>
-      <div class="data-box">${escapeHtml(w.name ?? '—')}</div>
-      <div class="data-label">Iqama No / ID</div>
-      <div class="data-box">${escapeHtml(w.iqama_no ?? '—')}</div>
-      <div class="data-label">Trade</div>
-      <div class="data-box">${escapeHtml(trade)}</div>
-      <div class="data-label">Card No</div>
-      <div class="data-box">${escapeHtml(w.card_number ?? '—')}</div>
-      <div class="data-label">Issued Date</div>
-      <div class="data-box">${escapeHtml(w.issued_date ?? '—')}</div>
-      <div class="data-label">Expiry Date</div>
-      <div class="data-box">${escapeHtml(w.expiry_date ?? '—')}</div>
-    `;
-    resultBox.classList.add('show');
-  }
+        .verify-summary-label {
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .verify-summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .verify-summary-table th, .verify-summary-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .verify-summary-table th {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+            background: #f9fafb;
+            width: 33%;
+        }
+        .verify-summary-table td {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b5563;
+        }
 
-  function renderNotFound() {
-    resultBox.innerHTML = `
-      <div class="msg-fail">Certificate No. or Sticker No. doesn't exist or not validated.</div>
-    `;
-    resultBox.classList.add('show');
-  }
+        .data-label {
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            color: #9ca3af;
+            margin-bottom: 5px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        .data-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px 15px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        /* Adjusted button loading state */
+        .tp-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
 
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = String(str);
-    return div.innerHTML;
-  }
-</script>
+<body>
+    <!-- mouse cursor drag start -->
+    <div class="mouseCursor cursor-outer"></div>
+    <div class="mouseCursor cursor-inner"><span><img src="/static/images/mouse-cursor.svg" alt=""></span></div>
+    
+    <!-- back to top start -->
+    <div class="back-to-top-wrapper">
+        <button id="back_to_top" type="button" class="back-to-top-btn">
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </button>
+    </div>
 
+    <!-- header area start -->
+    <header class="tp-header-area d-block p-relative">
+        <div class="tp-header-main-sticky tp-header-main p-relative">
+            <div class="container container-large">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 col-md-3 col-10">
+                        <div class="tp-header-logo scrolled">
+                            <a href="/">
+                                <img src="/static/images/logo1.webp" alt="Standard Arabia">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 d-none d-lg-block">
+                        <div class="tp-header-main-menu">
+                            <div class="tp-main-menu d-none d-xl-block">
+                                <nav class="tp-main-menu-content d-flex">
+                                    <ul class="main-nav">
+                                        <li><a href="/"><span>Home</span></a></li>
+                                        <li><a href="#"><span>About</span></a></li>
+                                        <li><a href="#"><span>Services</span></a></li>
+                                        <li><a href="#"><span>Contact</span></a></li>
+                                        <li class="ver-btn active"><a href="/verification"><span>Verification</span></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-9 col-2">
+                        <div class="tp-header-main-right d-flex align-items-center justify-content-end">
+                            <div class="tp-header-btn d-none d-xl-block">
+                                <a class="tp-btn tp-icon-style d-none d-xl-block" href="#">Contact Us</a>
+                            </div>
+                            <div class="tp-header-hamburger d-xl-none offcanvas-open-btn">
+                                <button class="hamburger-btn">
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- hero / breadcrumb area start -->
+        <section class="tp-hero-8-area tp-hero-8-right pt-105">
+            <main>
+                <section class="tp-breadcrumb__area pt-100 pb-100 p-relative z-index-1 fix">
+                    <div class="tp-breadcrumb__bg" style="background-image: url('/static/images/about-banner.webp');"></div>
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <div class="tp-breadcrumb__content text-center">
+                                    <h3 class="tp-breadcrumb__title" style="color: white;">Verification</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- contact/verification form area start -->
+                <section class="tp-contact-area pt-80 pb-80">
+                    <div class="container">
+                        <div class="tp-contact-area-form row justify-content-center">
+                            <div class="col-lg-10">
+                                <div class="tp-contact-wrapper mb-70">
+                                    <form id="verify-form">
+                                        <div class="tp-contact-input-form">
+                                            <div class="row">
+                                                <div class="col-xl-8 col-lg-8">
+                                                    <div class="tp-contact-input p-relative">
+                                                        <input id="query" type="text" placeholder="Enter Certificate No. or Sticker No." required autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4">
+                                                    <div class="tp-contact-btn">
+                                                        <button type="submit" id="verify-btn" class="tp-btn w-100">Verify</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                    <!-- Result Area -->
+                                    <div id="result"></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </section>
+    </main>
+
+    <!-- footer area start -->
+    <footer class="tp-footer-3-area tp-footer-fixed p-relative pt-120">
+        <div class="tp-footer-bg"></div>
+        <div class="tp-footer-box p-relative">
+            <div class="tp-footer-shape">
+                <img class="shape-1" src="/static/images/footer-bg-right.webp" alt="">
+                <img class="shape-2" src="/static/images/footer-bg-left.webp" alt="">
+            </div>
+            <div class="container">
+                <div class="tp-footer-main tp-footer-border">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                            <div class="tp-footer-widget tp-footer-col-1 mb-50">
+                                <div class="tp-footer-logo mb-40">
+                                    <img src="/static/images/logo-f.webp" alt="Standard Arabia">
+                                </div>
+                                <div class="tp-footer-widget-content">
+                                    <p>Standard Arabia is TVTC, Saudi Arabia Approved Training Center accredited by International Agency.</p>
+                                    <div class="tp-footer-widget-social">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                            <div class="tp-footer-widget tp-footer-col-2 mb-50">
+                                <h3 class="tp-footer-widget-title">Training Programs</h3>
+                                <div class="tp-footer-widget-content">
+                                    <ul>
+                                        <li><a href="#">IPAF Approved Training Program</a></li>
+                                        <li><a href="#">OSHA Approved Training Program</a></li>
+                                        <li><a href="#">TVTC Approved Training Program</a></li>
+                                        <li><a href="#">Rigging &amp; Lifting Training Program</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                            <div class="tp-footer-widget tp-footer-col-4 mb-50">
+                                <div class="tp-footer-widget-contact">
+                                    <h3 class="tp-footer-widget-title">Contact Us</h3>
+                                    <div class="tp-footer-widget-content">
+                                        <p><i class="fa-solid fa-phone"></i> +966-13-3670801</p>
+                                        <p><i class="fa-solid fa-envelope"></i> info@standardarabia.com</p>
+                                        <p><i class="fa-sharp fa-solid fa-location-dot"></i> Jubail, Kingdom of Saudi Arabia.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-footer-copyright">
+                    <div class="row">
+                        <div class="col-md-12 col-12 text-center">
+                            <div class="tp-footer-copyright-inner">
+                                <p>Standard Arabia Inspection Co &copy; 2026 / All Rights Reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Essential JS scripts -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap-bundle.js"></script>
+    <script src="/static/js/main.js"></script>
+
+    <!-- YOUR CUSTOM JS LOGIC -->
+    <script>
+        const form = document.getElementById('verify-form');
+        const input = document.getElementById('query');
+        const button = document.getElementById('verify-btn');
+        const resultBox = document.getElementById('result');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (!value) return;
+
+            button.disabled = true;
+            button.textContent = 'Checking...';
+            resultBox.classList.remove('show');
+            resultBox.innerHTML = '';
+
+            try {
+                const params = new URLSearchParams({
+                    name: value,
+                    card_number: value,
+                    iqama_no: value
+                });
+
+                const response = await fetch(`/verify?${params.toString()}`);
+
+                if (response.status === 404) {
+                    renderNotFound();
+                } else if (response.ok) {
+                    const data = await response.json();
+                    const worker = Array.isArray(data) ? data[0] : data;
+                    if (!worker) {
+                        renderNotFound();
+                    } else {
+                        renderVerified(worker);
+                    }
+                } else {
+                    renderNotFound();
+                }
+            } catch (err) {
+                console.error('Verify request failed:', err);
+                renderNotFound();
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Verify';
+            }
+        });
+
+        function renderVerified(w) {
+            const trade = w.trade ?? w.trade_course ?? '—';
+            resultBox.innerHTML = `
+                <div class="msg-ok"><i class="fa-solid fa-circle-check"></i> Standard Arabia confirms this operator / worker card is verified and on record.</div>
+                
+                <div class="row d-none d-md-block">
+                    <div class="col-12">
+                        <div class="verify-summary-label">Verification Data</div>
+                        <table class="verify-summary-table">
+                            <tr>
+                                <th>Name</th>
+                                <th>Iqama No / ID</th>
+                                <th>Trade</th>
+                            </tr>
+                            <tr>
+                                <td>${escapeHtml(w.name ?? '—')}</td>
+                                <td>${escapeHtml(w.iqama_no ?? '—')}</td>
+                                <td>${escapeHtml(trade)}</td>
+                            </tr>
+                            <tr>
+                                <th>Card No</th>
+                                <th>Issued Date</th>
+                                <th>Expiry Date</th>
+                            </tr>
+                            <tr>
+                                <td>${escapeHtml(w.card_number ?? '—')}</td>
+                                <td>${escapeHtml(w.issued_date ?? '—')}</td>
+                                <td>${escapeHtml(w.expiry_date ?? '—')}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Mobile View Boxes -->
+                <div class="row d-block d-md-none">
+                    <div class="col-12">
+                        <div class="data-label">Name</div>
+                        <div class="data-box">${escapeHtml(w.name ?? '—')}</div>
+                        
+                        <div class="data-label">Iqama No / ID</div>
+                        <div class="data-box">${escapeHtml(w.iqama_no ?? '—')}</div>
+                        
+                        <div class="data-label">Trade</div>
+                        <div class="data-box">${escapeHtml(trade)}</div>
+                        
+                        <div class="data-label">Card No</div>
+                        <div class="data-box">${escapeHtml(w.card_number ?? '—')}</div>
+                        
+                        <div class="data-label">Issued Date</div>
+                        <div class="data-box">${escapeHtml(w.issued_date ?? '—')}</div>
+                        
+                        <div class="data-label">Expiry Date</div>
+                        <div class="data-box">${escapeHtml(w.expiry_date ?? '—')}</div>
+                    </div>
+                </div>
+            `;
+            resultBox.classList.add('show');
+        }
+
+        function renderNotFound() {
+            resultBox.innerHTML = `
+                <div class="msg-fail"><i class="fa-solid fa-triangle-exclamation"></i> Certificate No. or Sticker No. doesn't exist or not validated.</div>
+            `;
+            resultBox.classList.add('show');
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+    </script>
 </body>
 </html>
