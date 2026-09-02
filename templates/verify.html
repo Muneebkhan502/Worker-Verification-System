@@ -292,23 +292,75 @@
     </header>
 
     <main>
-        <!-- hero section -->
-        <section class="tp-hero-8-area tp-hero-8-right pt-80">
+        
+       <!-- hero area start -->
+        <section class="tp-hero-8-area tp-hero-8-right pt-105">
             <main>
-                <!-- This matches your blue banner layout -->
+                <!-- about breadcrumb area start -->
                 <section class="tp-breadcrumb__area pt-100 pb-100 p-relative z-index-1 fix">
-                    <!-- Yahan banner image k liye background image path theek karna zaroori hai -->
-                    <div class="tp-breadcrumb__bg" style="background-image: url('/static/images/hero.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                    <div class="tp-breadcrumb__bg " data-background="../assets/img/banners/about-banner.webp"></div>
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-sm-12">
                                 <div class="tp-breadcrumb__content text-center">
-                                    <h2 class="tp-breadcrumb__title" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Verification</h2>
+                                    <h3 class="tp-breadcrumb__title">Verification</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+                <!-- about breadcrumb area end -->
+
+                <!-- contact area start -->
+                <section class="tp-contact-area">
+                    <div class="container">
+                        <div class="tp-contact-area-form row">
+                            <div class="col-lg-12">
+                                <div class="tp-contact-wrapper mb-70">
+                                    <form action="" method="POST">
+                                        <div class="tp-contact-input-form">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-6">
+                                                    <div class="tp-contact-input p-relative">
+                                                        <input id="CNO" name="CNO" type="text"
+                                                            placeholder="Enter Certificate No. or Sticker No.">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6">
+
+                                                    <div class="tp-contact-btn">
+
+                                                        <button type="button" id="submitBtn"
+                                                            class="tp-btn">Verify</button>
+                                                        <p class="ajax-response"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div id="appendHtml"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- contact area end -->
+
+
+
+
+
+
+
+            </main>
+
+            </div>
+
+        </section>
+        <!-- hero area end -->
 
                 <!-- verification form area -->
                 <section class="tp-contact-area pt-80 pb-100">
@@ -340,62 +392,93 @@
     </main>
 
     <!-- footer area -->
-    <footer class="tp-footer-3-area p-relative pt-100 pb-40 footer-text-large" style="background-color: #0A1229;">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
-                    <div class="tp-footer-logo mb-25">
-                        <img src="/static/images/logo-f.webp" alt="Standard Arabia">
-                    </div>
-                    <p style="margin-bottom: 25px;">Standard Arabia is TVTC, Saudi Arabia Approved Training Center accredited by International Agency.</p>
-                    
-                    <!-- Social Links Fix (Circular BG) -->
-                    <div class="tp-footer-widget-social">
-                        <a href="https://www.facebook.com/standardarabiainspection/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/standard_arabia/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/company/standard-arabia-inspection-co.-ltd." target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
-                    <h4 class="footer-heading">Training Programs</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding-bottom: 8px;">IPAF Approved Training Program</li>
-                        <li style="padding-bottom: 8px;">IADC Approved Training Program</li>
-                        <li style="padding-bottom: 8px;">OSHA Approved Training Program</li>
-                        <li style="padding-bottom: 8px;">NEBOSH Approved Training Program</li>
-                        <li style="padding-bottom: 8px;">TVTC Approved Training Program</li>
-                        <li style="padding-bottom: 8px;">Rigging & Lifting Training Program</li>
-                        <li style="padding-bottom: 8px;">First Aid & BLS Training Program</li>
-                        <li style="padding-bottom: 8px;">IOSH Approved Training Program</li>
-                        <li style="padding-bottom: 8px;">PASMA Approved Training Program</li>
-                    </ul>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 mb-50">
-                    <h4 class="footer-heading">Contact Us</h4>
-                    <div>
-                        <div class="contact-row">
-                            <i class="fa-solid fa-phone"></i>
-                            <p>+966-13-3670801<br>+966-53-9461485</p>
-                        </div>
-                        <div class="contact-row">
-                            <i class="fa-solid fa-envelope"></i>
-                            <p>admin@standardarabia.com<br>info@standardarabia.com</p>
-                        </div>
-                        <div class="contact-row">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p>P.O. Box 10353, Al Jubail 31961, Support Industrial Zone, Jubail, Kingdom of Saudi Arabia.</p>
-                        </div>
-                    </div>
-                </div>
+     <footer class="tp-footer-3-area tp-footer-fixed p-relative pt-120">
+        <div class="tp-footer-bg"></div>
+        <div class="tp-footer-box p-relative">
+            <div class="tp-footer-shape">
+                <img class="shape-1" src="../assets/img/bg/footer-bg-right.webp" alt="">
+                <img class="shape-2" src="../assets/img/bg/footer-bg-left.webp" alt="">
             </div>
-            <div class="row mt-40 pt-30" style="border-top: 1px solid rgba(255,255,255,0.1);">
-                <div class="col-md-6 col-12 text-center text-md-start mb-3 mb-md-0">
-                    <p class="footer-bottom-text m-0">Standard Arabia Inspection Co &copy; 2026 / All Rights Reserved</p>
+            <div class="container">
+                <div class="tp-footer-main tp-footer-border">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                            <div class="tp-footer-widget tp-footer-col-1 mb-50">
+                                <div class="tp-footer-logo mb-40">
+                                    <a href="../index.php"> <img src="../assets/img/logo-f.webp"
+                                            title="Standard Arabia Inspection Co. Ltd, KSA"
+                                            alt="Standard Arabia Inspection Co. Ltd, KSA"></a>
+                                </div>
+                                <div class="tp-footer-widget-content">
+                                    <p>Standard Arabia is TVTC, Saudi Arabia Approved Training Center accredited by
+                                        International Agency.</p>
+                                    <div class="tp-footer-widget-social">
+                                        <a href="https://www.facebook.com/standardarabiainspection/" target="_blank"><i
+                                                class="fab fa-facebook-f"></i></a>
+                                        <a href="https://www.instagram.com/standard_arabia/" target="_blank"><i
+                                                class="fa-brands fa-instagram"></i></a>
+                                        <a href="https://www.linkedin.com/company/standard-arabia-inspection-co.-ltd."
+                                            target="_blank"><i class="fab fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                 <div class="col-xl-5 col-lg-4 col-md-6 col-sm-12 col-12">
+                            <div class="tp-footer-widget tp-footer-col-2 mb-50">
+                                <h3 class="tp-footer-widget-title">Training Programs</h3>
+                                <div class="tp-footer-widget-content">
+                                    <ul>
+                                        <li><a href="">IPAF Approved Training Program </a></li>
+                                        <li><a href="">IADC Approved Training Program</a></li>
+                                        <li><a href="">OSHA Approved Training Program </a></li>
+                                        <li><a href="">NEBOSH Approved Training Program</a></li>
+                                        <li><a href="">TVTC Approved Training Program</a></li>
+                                        <li><a href="">Rigging & Lifting Training Program</a></li>
+                                        <li><a href="">First Aid & BLS Training Program</a></li>
+                                        <li><a href="">IOSH Approved Training Program</a></li>
+                                        <li><a href="">PASMA Approved Training Program </a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                            <div class="tp-footer-widget tp-footer-col-4 mb-50">
+                                <div class="tp-footer-widget-content">
+                                    <div class="tp-footer-widget-contact">
+                                        <h3 class="tp-footer-widget-title">Contact Us</h3>
+                                        <div class="tp-footer-widget-content">
+                                            <p><i class="fa-solid fa-phone"></i>+ 966-13-3670801<br>+ 966-53-9461485</p>
+                                            <p><i
+                                                    class="fa-solid fa-envelope"></i>admin@standardarabia.com<br>info@standardarabia.com
+                                            </p>
+                                            <p><i class="fa-sharp fa-solid fa-location-dot"></i>P.O. Box 10353, Al
+                                                Jubail
+                                                31961, Support Industrial Zone, Jubail, Kingdom of Saudi Arabia.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 col-12 text-center text-md-end">
-                    <p class="footer-bottom-text m-0">Designed By BM Softtech</p>
+            <div class="tp-footer-copyright">
+                    <div class="row">
+                        <div class="col-md-7 col-12">
+                            <div class="tp-footer-copyright-inner">
+                                <p>Standard Arabia Inspection Co © 2024 / All Rights Reserved</p>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-12">
+                            <div class="tp-footer-copyright-inner text-md-end">
+                                <p>Designed By <a target="_blank" href="https://bmsofttech.com/">BM Softtech</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
