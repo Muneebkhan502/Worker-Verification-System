@@ -107,7 +107,7 @@
                         <div class="tp-contact-area-form row">
                             <div class="col-lg-12">
                                 <div class="tp-contact-wrapper mb-70">
-                                    <form action="" method="POST">
+                                    <form action="" method="POST" id="verifyForm">
                                         <div class="tp-contact-input-form">
                                             <div class="row">
                                                 <div class="col-xl-6 col-lg-6">
@@ -162,8 +162,8 @@
         <div class="tp-footer-bg"></div>
         <div class="tp-footer-box p-relative">
             <div class="tp-footer-shape">
-                <img class="shape-1" src="../assets/img/bg/footer-bg-right.webp" alt="">
-                <img class="shape-2" src="../assets/img/bg/footer-bg-left.webp" alt="">
+                <img class="shape-1" src="/static/images/footer-bg-right.webp" alt="">
+                <img class="shape-2" src="/static/images/footer-bg-left.webp" alt="">
             </div>
             <div class="container">
                 <div class="tp-footer-main tp-footer-border">
@@ -171,7 +171,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                             <div class="tp-footer-widget tp-footer-col-1 mb-50">
                                 <div class="tp-footer-logo mb-40">
-                                    <a href="#"> <img src="../assets/img/logo-f.webp"
+                                    <a href="#"> <img src="/static/images/logo-f.webp"
                                             title="Standard Arabia Inspection Co. Ltd, KSA"
                                             alt="Standard Arabia Inspection Co. Ltd, KSA"></a>
                                 </div>
@@ -251,19 +251,25 @@
 
     <!-- YOUR CUSTOM JS LOGIC -->
     <script>
-        const form = document.getElementById('verify-form');
-        const input = document.getElementById('query');
-        const button = document.getElementById('verify-btn');
-        const resultBox = document.getElementById('result');
+        const form = document.getElementById('verifyForm');
+        const input = document.getElementById('CNO');
+        const button = document.getElementById('submitBtn');
+        const responseMsg = document.querySelector('.ajax-response');
+        const resultBox = document.getElementById('appendHtml');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        form.addEventListener('submit', (e) => e.preventDefault());
+        button.addEventListener('click', runVerification);
+
+        async function runVerification() {
             const value = input.value.trim();
-            if (!value) return;
+            responseMsg.textContent = '';
+            if (!value) {
+                responseMsg.textContent = 'Please enter Certificate No. or Sticker No.';
+                return;
+            }
 
             button.disabled = true;
             button.textContent = 'Checking...';
-            resultBox.classList.remove('show');
             resultBox.innerHTML = '';
 
             try {
@@ -295,7 +301,7 @@
                 button.disabled = false;
                 button.textContent = 'Verify';
             }
-        });
+        }
 
         function renderVerified(w) {
         const trade = w.trade ?? w.trade_course ?? '—';
@@ -359,7 +365,6 @@
                 </div>
             </div>
         `;
-        resultBox.classList.add('show');
     }
 
     function renderNotFound() {
@@ -369,7 +374,6 @@
                 Certificate No. or Sticker No. doesn't exist or not validated.
             </div>
         `;
-        resultBox.classList.add('show');
         }
 
         function escapeHtml(str) {
