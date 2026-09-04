@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Standard Arabia Inspection company Saudi Arabia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.webp">
 
@@ -18,11 +19,11 @@
     <link rel="stylesheet" href="/static/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    
+
 </head>
 
 <body>
-        <!-- header area start -->
+    <!-- header area start -->
     <header class="tp-header-area d-block d-sm-none p-relative">
         <div class="tp-header-main-sticky tp-header-main p-relative">
             <div class="container container-large">
@@ -64,32 +65,32 @@
 
 
                                                 <li><a href="#">Contact</a></li>
-                                                <li class="ver-btn"><a
-                                                        href="#">Verification</a>
+                                                <li class="ver-btn"><a href="#">Verification</a>
                                                 </li>
                                             </ul>
-                            <div class="tp-header-hamburger d-xl-none offcanvas-open-btn">
-                                    <button class="hamburger-btn">
-                                        <span></span>
-                                        <span></span>
-                                    </button>
+                                            <div class="tp-header-hamburger d-xl-none offcanvas-open-btn">
+                                                <button class="hamburger-btn">
+                                                    <span></span>
+                                                    <span></span>
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </header>
 
     <main>
-        
-       <!-- hero area start -->
+
+        <!-- hero area start -->
         <section class="tp-hero-8-area tp-hero-8-right pt-105">
             <main>
                 <!-- about breadcrumb area start -->
                 <section class="tp-breadcrumb__area pt-100 pb-100 p-relative z-index-1 fix">
-                    <div class="tp-breadcrumb__bg" style="background-image: url('/static/images/hero.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                        
+                    <div class="tp-breadcrumb__bg"
+                        style="background-image: url('/static/images/hero.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+
                     </div>
                     <div class="container">
                         <div class="row align-items-center">
@@ -154,13 +155,13 @@
         </section>
         <!-- hero area end -->
 
-                
-        
-    
+
+
+
     </main>
 
     <!-- footer area -->
-     <footer class="tp-footer-3-area tp-footer-fixed p-relative pt-120">
+    <footer class="tp-footer-3-area tp-footer-fixed p-relative pt-120">
         <div class="tp-footer-bg"></div>
         <div class="tp-footer-box p-relative">
             <div class="tp-footer-shape">
@@ -181,10 +182,8 @@
                                     <p>Standard Arabia is TVTC, Saudi Arabia Approved Training Center accredited by
                                         International Agency.</p>
                                     <div class="tp-footer-widget-social">
-                                        <a href="#" target="_blank"><i
-                                                class="fab fa-facebook-f"></i></a>
-                                        <a href="#" target="_blank"><i
-                                                class="fa-brands fa-instagram"></i></a>
+                                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                                         <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
                                         <a href="#"><i class="fa-brands fa-youtube"></i></a>
                                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -194,7 +193,7 @@
 
                             </div>
                         </div>
-                 <div class="col-xl-5 col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="col-xl-5 col-lg-4 col-md-6 col-sm-12 col-12">
                             <div class="tp-footer-widget tp-footer-col-2 mb-50">
                                 <h3 class="tp-footer-widget-title">Training Programs</h3>
                                 <div class="tp-footer-widget-content">
@@ -213,7 +212,7 @@
                                 </div>
                             </div>
                         </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="tp-footer-widget tp-footer-col-4 mb-50">
                                 <div class="tp-footer-widget-content">
                                     <div class="tp-footer-widget-contact">
@@ -233,7 +232,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="tp-footer-copyright">
+                <div class="tp-footer-copyright">
                     <div class="row">
                         <div class="col-md-7 col-12">
                             <div class="tp-footer-copyright-inner">
@@ -306,8 +305,8 @@
         }
 
         function renderVerified(w) {
-        const trade = w.trade ?? w.trade_course ?? '—';
-        resultBox.innerHTML = `
+            const trade = w.trade ?? w.trade_course ?? '—';
+            resultBox.innerHTML = `
             <!-- Exact Screenshot Success Message -->
             <div class="msg-ok">
                 <i class="fa-solid fa-circle-check" style="font-size: 20px;"></i>
@@ -371,147 +370,193 @@
                 </div>
             </div>
         `;
-    }
+        }
 
-    function renderNotFound() {
-        resultBox.innerHTML = `
+        function renderNotFound() {
+            resultBox.innerHTML = `
             <!-- Exact Error Style -->
             <div class="msg-fail">
                 <i class="fa-solid fa-circle-exclamation" style="font-size: 20px;"></i>
                 <div>Certificate No. or Sticker No. doesn't exist or not validated.</div>
             </div>
         `;
-    }
+        }
 
-    function escapeHtml(str) {
-        const div = document.createElement('div');
-        div.textContent = String(str);
-        return div.innerHTML;
-    }
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
     </script>
-    
-<style>
-.class1 {
-    background: #345eb2;
-    width: 20%;
-    text-align: center;
-    clear: both;
-    margin-left: 38%;
-    font-weight: 600;
-    font-size: 15px;
-    color: white;
-    padding: -10px !important;
-    margin-top: -10px;
-    margin-bottom: -10px;
-}
 
-@media only screen and (max-width: 768px) {
+    <style>
+        .class1 {
+            background: #345eb2;
+            width: 20%;
+            text-align: center;
+            clear: both;
+            margin-left: 38%;
+            font-weight: 600;
+            font-size: 15px;
+            color: white;
+            padding: -10px !important;
+            margin-top: -10px;
+            margin-bottom: -10px;
+        }
 
-    /* Adjust table header and cell padding */
-    .cmsmasters_table_row_header th,
-    .cmsmasters_table_cell_aligncenter {
-        padding: 8px;
-    }
+        @media only screen and (max-width: 768px) {
 
-    /* Consider making table scrollable if needed */
-    .table-container {
-        overflow-x: auto;
-    }
-}
-/* Result Area Display */
-#result { display: none; margin-top: 30px; text-align: left; }
-#result.show { display: block; animation: fadeIn 0.5s; }
-#appendHtml { margin-top: 30px; text-align: left; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            /* Adjust table header and cell padding */
+            .cmsmasters_table_row_header th,
+            .cmsmasters_table_cell_aligncenter {
+                padding: 8px;
+            }
 
-/* Exact Screenshot Success & Error Box Styles */
-.msg-ok {
-    background-color: #d1fae5;
-    color: #065f46;
-    padding: 20px;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 16px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    line-height: 1.5;
-}
-.msg-ok i {
-    margin-top: 2px;
-}
-.msg-fail {
-    background-color: #fee2e2;
-    color: #991b1b;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 5px solid #dc2626;
-    font-weight: 500;
-    font-size: 16px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+            /* Consider making table scrollable if needed */
+            .table-container {
+                overflow-x: auto;
+            }
+        }
 
-/* Desktop Table View */
-.desktop-table-view { display: none; }
-@media (min-width: 768px) {
-    .desktop-table-view { display: block; }
-    .mobile-box-view { display: none; }
-}
+        /* Result Area Display */
+        #result {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+        }
 
-.verify-summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border: 1px solid #f1f5f9;
-}
-.verify-summary-table th, .verify-summary-table td {
-    padding: 16px 20px;
-    border-bottom: 1px solid #f1f5f9;
-    text-align: left;
-}
-.verify-summary-table th {
-    font-size: 14px;
-    font-weight: 700;
-    color: #64748b;
-    background: #f8fafc;
-}
-.verify-summary-table td {
-    font-size: 15px;
-    color: #333;
-}
+        #result.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
 
-/* Exact Original Mobile UI Boxes (Floating text fix) */
-.mobile-box-view { display: block; }
-@media (min-width: 768px) { .mobile-box-view { display: none; } }
+        #appendHtml {
+            margin-top: 30px;
+            text-align: left;
+        }
 
-.data-group {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 15px 20px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-.data-label {
-    font-size: 12px;
-    color: #64748b;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-}
-.data-value {
-    font-size: 16px;
-    color: #0f172a;
-    font-weight: 600;
-}
-</style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Exact Screenshot Success & Error Box Styles */
+        .msg-ok {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            line-height: 1.5;
+        }
+
+        .msg-ok i {
+            margin-top: 2px;
+        }
+
+        .msg-fail {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #dc2626;
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Desktop Table View */
+        .desktop-table-view {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .desktop-table-view {
+                display: block;
+            }
+
+            .mobile-box-view {
+                display: none;
+            }
+        }
+
+        .verify-summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        .verify-summary-table th,
+        .verify-summary-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            text-align: left;
+        }
+
+        .verify-summary-table th {
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            background: #f8fafc;
+        }
+
+        .verify-summary-table td {
+            font-size: 15px;
+            color: #333;
+        }
+
+        /* Exact Original Mobile UI Boxes (Floating text fix) */
+        .mobile-box-view {
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-box-view {
+                display: none;
+            }
+        }
+
+        .data-group {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .data-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .data-value {
+            font-size: 16px;
+            color: #0f172a;
+            font-weight: 600;
+        }
+    </style>
 </body>
+
 </html>
