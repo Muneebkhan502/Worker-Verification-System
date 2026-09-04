@@ -23,36 +23,6 @@
 </head>
 
 <body>
-    <!-- offcanvas area start -->
-    <div class="offcanvas__area">
-        <div class="offcanvas__close">
-            <button class="offcanvas__close-btn offcanvas-close-btn">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </button>
-        </div>
-        <div class="offcanvas__wrapper">
-            <div class="offcanvas__content">
-                <div class="offcanvas__top mb-20">
-                    <div class="offcanvas__logo">
-                        <!-- <a href="index.php">
-                            <img src="../assets/img/logo.webp" title="Standard Arabia, Saudi Arabia Approved Training Center" alt="Standard Arabia, Saudi Arabia Approved Training Center">
-                        </a> -->
-                    </div>
-                </div>
-
-                <div class="tp-main-menu-mobile fix"></div>
-
-
-            </div>
-        </div>
-    </div>
-    <div class="body-overlay"></div>
-    <!-- offcanvas area end -->
     <!-- header area start -->
     <header class="tp-header-area d-block d-sm-none p-relative">
         <div class="tp-header-main-sticky tp-header-main p-relative">
@@ -99,7 +69,7 @@
                                                 </li>
                                             </ul>
                                             <div class="tp-header-hamburger d-xl-none offcanvas-open-btn">
-                                                <button class="hamburger-btn">
+                                                <button class="verify-hamburger-btn">
                                                     <span></span>
                                                     <span></span>
                                                 </button>
@@ -350,15 +320,16 @@
                         <th>IqamaNo/ID</th>
                         <th>Course Name</th>
                     </tr>
-                    <tr>
-                        <td>${escapeHtml(w.name ?? '—')}</td>
-                        <td>${escapeHtml(w.iqama_no ?? '—')}</td>
-                        <td>${escapeHtml(trade)}</td>
-                    </tr>
+                    
                     <tr>
                         <th>Card No</th>
                         <th>Issued Date</th>
                         <th>Expiry Date</th>
+                    </tr>
+                    <tr>
+                        <td>${escapeHtml(w.name ?? '—')}</td>
+                        <td>${escapeHtml(w.iqama_no ?? '—')}</td>
+                        <td>${escapeHtml(trade)}</td>
                     </tr>
                     <tr>
                         <td>${escapeHtml(w.card_number ?? '—')}</td>
@@ -447,7 +418,7 @@
         }
 
         .desktop-table-view {
-            display: none;
+            display: block;
             text-align: left;
         }
 
@@ -456,15 +427,7 @@
             text-align: left;
         }
 
-        @media (min-width: 768px) {
-            .desktop-table-view {
-                display: block;
-            }
 
-            .mobile-box-view {
-                display: none;
-            }
-        }
 
         .verify-data-label {
             color: #999999;
@@ -516,6 +479,27 @@
             font-size: 15px;
             padding: 10px 14px 14px;
             text-transform: uppercase;
+        }
+
+        .verify-hamburger-btn {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            width: 28px;
+            height: 22px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .verify-hamburger-btn span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #0c598f;
+            border-radius: 2px;
         }
 
         @media only screen and (max-width: 768px) {
