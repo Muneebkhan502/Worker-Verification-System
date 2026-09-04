@@ -336,7 +336,8 @@
                         <td>${escapeHtml(w.name ?? '—')}</td>
                         <td>${escapeHtml(w.iqama_no ?? '—')}</td>
                         <td>${escapeHtml(trade)}</td>
-
+                    </tr>
+                    <tr>
                         <td>${escapeHtml(w.card_number ?? '—')}</td>
                         <td>${escapeHtml(w.issued_date ?? '—')}</td>
                         <td>${escapeHtml(w.expiry_date ?? '—')}</td>
@@ -451,6 +452,8 @@
             font-weight: 600;
             font-size: 15px;
             padding: 4px 12px 4px 0;
+            display: table-cell;
+            white-space: nowrap;
         }
 
         .verify-summary-table td {
