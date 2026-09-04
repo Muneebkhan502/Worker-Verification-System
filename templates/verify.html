@@ -24,11 +24,14 @@
 
 <body>
     <!-- header area start -->
+    <!-- header area start -->
     <header class="tp-header-area p-relative">
         <div class="tp-header-main-sticky tp-header-main p-relative">
             <div class="container container-large">
                 <div class="row align-items-center">
-                    <div class="col-lg-2 col-md-3 col-10">
+                    
+                    <!-- 1. Logo ki space ko col-10 se col-8 kar diya taake button k lye jagah banay -->
+                    <div class="col-lg-2 col-md-3 col-8">
                         <div class="tp-header-logo">
                             <a href="#">
                                 <img src="/static/images/logo1.webp"
@@ -37,18 +40,15 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-7">
+                    
+                    <!-- 2. Desktop menu ko mobile par hide (d-none d-lg-block) kiya taake layout na bikhre -->
+                    <div class="col-lg-7 d-none d-lg-block">
                         <div class="row">
-                            <div class="col-lg-8">
-
-                            </div>
-
+                            <div class="col-lg-8"></div>
                             <div class="col-lg-4">
-
                                 <div class="tp-header-main-menu">
                                     <div class="tp-main-menu d-none d-xl-block">
                                         <nav class="tp-main-menu-content d-flex">
-
                                             <ul class="main-nav">
                                                 <div><a href="#">
                                                         <img src="/static/images/logo.webp" width="150px"
@@ -56,29 +56,36 @@
                                                             alt="Standard Arabia, Saudi Arabia Approved Training Center">
                                                     </a></div>
                                                 <li><a href="#">Home</a></li>
-
                                                 <li><a href="#">About</a> </li>
                                                 <li><a href="#">Services</a> </li>
                                                 <li><a href="#">Accreditations</a></li>
-
                                                 <li><a href="#">News & Feeds</a></li>
-
-
                                                 <li><a href="#">Contact</a></li>
-                                                <li class="ver-btn"><a href="#">Verification</a>
-                                                </li>
+                                                <li class="ver-btn"><a href="#">Verification</a></li>
                                             </ul>
-                                            <div class="tp-header-hamburger d-xl-none offcanvas-open-btn">
-                                                <button class="verify-hamburger-btn">
-                                                    <span></span>
-                                                    <span></span>
-                                                </button>
-                                            </div>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 3. Hamburger Button k liye col-4 ka alag naya block banaya jo sirf mobile par aayega -->
+                    <div class="col-4 d-block d-lg-none">
+                        <div class="tp-header-main-right d-flex align-items-center justify-content-end">
+                            <div class="tp-header-hamburger offcanvas-open-btn">
+                                <button class="verify-hamburger-btn">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div> <!-- row ends -->
+            </div> <!-- container ends -->
+        </div> <!-- sticky main ends -->
     </header>
 
     <main>
