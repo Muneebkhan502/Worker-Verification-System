@@ -23,6 +23,36 @@
 </head>
 
 <body>
+    <!-- offcanvas area start -->
+    <div class="offcanvas__area">
+        <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        <div class="offcanvas__wrapper">
+            <div class="offcanvas__content">
+                <div class="offcanvas__top mb-20">
+                    <div class="offcanvas__logo">
+                        <!-- <a href="index.php">
+                            <img src="../assets/img/logo.webp" title="Standard Arabia, Saudi Arabia Approved Training Center" alt="Standard Arabia, Saudi Arabia Approved Training Center">
+                        </a> -->
+                    </div>
+                </div>
+
+                <div class="tp-main-menu-mobile fix"></div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="body-overlay"></div>
+    <!-- offcanvas area end -->
     <!-- header area start -->
     <header class="tp-header-area d-block d-sm-none p-relative">
         <div class="tp-header-main-sticky tp-header-main p-relative">
@@ -307,17 +337,13 @@
         function renderVerified(w) {
             const trade = w.trade ?? w.trade_course ?? '—';
             resultBox.innerHTML = `
-            <!-- Exact Screenshot Success Message -->
             <div class="msg-ok">
-                <i class="fa-solid fa-circle-check" style="font-size: 20px;"></i>
-                <div>
-                    Standard Arabia confirms this operator /<br>
-                    worker card is verified and on record.
-                </div>
+                Standard Arabia confirms below candidate successfully completed training and certification
             </div>
             
             <!-- Desktop Table View -->
             <div class="desktop-table-view">
+                <div class="verify-data-label">Verification Data</div>
                 <table class="verify-summary-table">
                     <tr>
                         <th>Name</th>
@@ -341,7 +367,7 @@
                     </tr>
                 </table>
             </div>
-
+ 
             <!-- Exact Mobile Box View -->
             <div class="mobile-box-view mt-3">
                 <div class="data-group">
@@ -374,10 +400,8 @@
 
         function renderNotFound() {
             resultBox.innerHTML = `
-            <!-- Exact Error Style -->
             <div class="msg-fail">
-                <i class="fa-solid fa-circle-exclamation" style="font-size: 20px;"></i>
-                <div>Certificate No. or Sticker No. doesn't exist or not validated.</div>
+                Certificate No. or Sticker No. doesn't exist or not validated.
             </div>
         `;
         }
@@ -404,83 +428,32 @@
             margin-bottom: -10px;
         }
 
-        @media only screen and (max-width: 768px) {
-
-            /* Adjust table header and cell padding */
-            .cmsmasters_table_row_header th,
-            .cmsmasters_table_cell_aligncenter {
-                padding: 8px;
-            }
-
-            /* Consider making table scrollable if needed */
-            .table-container {
-                overflow-x: auto;
-            }
-        }
-
-        /* Result Area Display */
-        #result {
-            display: none;
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        #result.show {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        #appendHtml {
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Exact Screenshot Success & Error Box Styles */
-        .msg-ok {
-            background-color: #d1fae5;
-            color: #065f46;
-            padding: 20px;
-            border-radius: 8px;
-            font-weight: 500;
+        /* ---- Verification result — matched to reference screenshot ---- */
+        .msg-ok,
+        .msg-fail {
+            text-align: center;
+            font-weight: 600;
             font-size: 16px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin: 20px 0 25px;
         }
 
-        .msg-ok i {
-            margin-top: 2px;
+        .msg-ok {
+            color: #396238;
         }
 
         .msg-fail {
-            background-color: #fee2e2;
-            color: #991b1b;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 5px solid #dc2626;
-            font-weight: 500;
-            font-size: 16px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            color: #a83232;
         }
 
-        /* Desktop Table View */
         .desktop-table-view {
             display: none;
+            text-align: left;
+        }
+
+        .mobile-box-view {
+            display: block;
+            text-align: left;
         }
 
         @media (min-width: 768px) {
@@ -493,68 +466,70 @@
             }
         }
 
+        .verify-data-label {
+            color: #999999;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
         .verify-summary-table {
             width: 100%;
             border-collapse: collapse;
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f1f5f9;
-        }
-
-        .verify-summary-table th,
-        .verify-summary-table td {
-            padding: 16px 20px;
-            border-bottom: 1px solid #f1f5f9;
-            text-align: left;
         }
 
         .verify-summary-table th {
-            font-size: 14px;
+            text-align: left;
+            color: #2b2b2b;
             font-weight: 700;
-            color: #64748b;
-            background: #f8fafc;
+            font-size: 15px;
+            padding: 4px 12px 4px 0;
         }
 
         .verify-summary-table td {
+            text-align: left;
+            color: #5a5a5a;
+            font-weight: 400;
             font-size: 15px;
-            color: #333;
-        }
-
-        /* Exact Original Mobile UI Boxes (Floating text fix) */
-        .mobile-box-view {
-            display: block;
-        }
-
-        @media (min-width: 768px) {
-            .mobile-box-view {
-                display: none;
-            }
+            padding: 2px 12px 12px 0;
         }
 
         .data-group {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px 20px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            overflow: hidden;
             margin-bottom: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
         .data-label {
-            font-size: 12px;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
+            background: #f2f2f2;
+            color: #8a8a8a;
+            font-size: 13px;
+            font-weight: 400;
+            padding: 8px 14px;
+            border-bottom: 1px solid #e2e2e2;
         }
 
         .data-value {
-            font-size: 16px;
-            color: #0f172a;
+            background: #ffffff;
+            color: #1a1a1a;
             font-weight: 600;
+            font-size: 15px;
+            padding: 10px 14px 14px;
+            text-transform: uppercase;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            /* Adjust table header and cell padding */
+            .cmsmasters_table_row_header th,
+            .cmsmasters_table_cell_aligncenter {
+                padding: 8px;
+            }
+
+            /* Consider making table scrollable if needed */
+            .table-container {
+                overflow-x: auto;
+            }
         }
     </style>
 </body>
