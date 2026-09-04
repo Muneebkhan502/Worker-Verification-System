@@ -29,7 +29,7 @@
         <div class="tp-header-main-sticky tp-header-main p-relative">
             <div class="container container-large">
                 <div class="row align-items-center">
-                    
+
                     <!-- 1. Logo ki space ko col-10 se col-8 kar diya taake button k lye jagah banay -->
                     <div class="col-lg-2 col-md-3 col-8">
                         <div class="tp-header-logo">
@@ -40,7 +40,7 @@
                             </a>
                         </div>
                     </div>
-                    
+
                     <!-- 2. Desktop menu ko mobile par hide (d-none d-lg-block) kiya taake layout na bikhre -->
                     <div class="col-lg-7 d-none d-lg-block">
                         <div class="row">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div> <!-- row ends -->
             </div> <!-- container ends -->
         </div> <!-- sticky main ends -->
@@ -493,36 +493,44 @@
             display: inline-flex;
             flex-direction: column;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
+            /* thora kam gap */
             width: 28px;
             height: 22px;
             background: transparent;
             border: none;
             cursor: pointer;
             padding: 0;
+            align-items: flex-end;
+            /* 👈 is se choti line right pe jayegi */
         }
 
         .verify-hamburger-btn span {
             display: block;
-            width: 100%;
-            height: 2px;
+            height: 2.5px;
+            /* thora mota */
             background-color: #0c598f;
-            border-radius: 2px;
+            /* tumhara blue color */
+            border-radius: 3px;
         }
 
-        @media only screen and (max-width: 768px) {
-
-            /* Adjust table header and cell padding */
-            .cmsmasters_table_row_header th,
-            .cmsmasters_table_cell_aligncenter {
-                padding: 8px;
-            }
-
-            /* Consider making table scrollable if needed */
-            .table-container {
-                overflow-x: auto;
-            }
+        /* Upar wali line 50% */
+        .verify-hamburger-btn span:nth-child(1) {
+            width: 50%;
         }
+            @media only screen and (max-width: 768px) {
+
+                /* Adjust table header and cell padding */
+                .cmsmasters_table_row_header th,
+                .cmsmasters_table_cell_aligncenter {
+                    padding: 8px;
+                }
+
+                /* Consider making table scrollable if needed */
+                .table-container {
+                    overflow-x: auto;
+                }
+            }
     </style>
 </body>
 
