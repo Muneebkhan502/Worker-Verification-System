@@ -30,7 +30,7 @@
             <div class="container container-large">
                 <div class="row align-items-center">
 
-        
+
                     <div class="col-lg-2 col-md-3 col-10">
                         <div class="tp-header-logo">
                             <a href="#">
@@ -42,7 +42,7 @@
                     </div>
 
                     <!-- 2. Desktop menu ko mobile par hide (d-none d-lg-block) kiya taake layout na bikhre -->
-                    <div class="col-lg-7 d-none d-lg-block">
+                    <div class="col-2 col-lg-7 d-flex justify-content-end align-items-center">
                         <div class="row">
                             <div class="col-lg-8"></div>
                             <div class="col-lg-4">
@@ -95,7 +95,7 @@
                 <!-- about breadcrumb area start -->
                 <section class="tp-breadcrumb__area pt-100 pb-100 p-relative z-index-1 fix">
                     <div class="tp-breadcrumb__bg"
-                        style="background-image: url('/static/images/hero.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; filter:brightness(1.15)">
+                        style="background-image: url('/static/images/hero.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
                     </div>
                     <div class="container">
@@ -317,7 +317,7 @@
                 Standard Arabia confirms below candidate successfully completed training and certification
             </div>
             
-            <!-- Desktop Table View -->
+            <!-- Desktop Table View (Hides on Mobile) -->
             <div class="desktop-table-view">
                 <div class="verify-data-label">Verification Data</div>
                 <table class="verify-summary-table">
@@ -326,16 +326,15 @@
                         <th>IqamaNo/ID</th>
                         <th>Course Name</th>
                     </tr>
-                    
-                    <tr>
-                        <th>Card No</th>
-                        <th>Issued Date</th>
-                        <th>Expiry Date</th>
-                    </tr>
                     <tr>
                         <td>${escapeHtml(w.name ?? '—')}</td>
                         <td>${escapeHtml(w.iqama_no ?? '—')}</td>
                         <td>${escapeHtml(trade)}</td>
+                    </tr>
+                    <tr>
+                        <th>Card No</th>
+                        <th>Issued Date</th>
+                        <th>Expiry Date</th>
                     </tr>
                     <tr>
                         <td>${escapeHtml(w.card_number ?? '—')}</td>
@@ -344,9 +343,21 @@
                     </tr>
                 </table>
             </div>
+
+            <!-- Original Broken Mobile Text Layout (Replicated Exactly) -->
+            <div class="mobile-raw-text">
+                <div class="verify-data-label">Verification Data</div>
+                <div class="raw-th"><strong>Name</strong> &nbsp;&nbsp;&nbsp; <strong>IqamaNo/ID</strong> &nbsp;&nbsp;&nbsp; <strong>Course Name</strong></div>
+                <div class="raw-th"><strong>Card No</strong> &nbsp;&nbsp;&nbsp; <strong>Issued Date</strong> &nbsp;&nbsp;&nbsp; <strong>Expiry Date</strong></div>
+                <div class="raw-td mt-3">${escapeHtml(w.name ?? '—')}</div>
+                <div class="raw-td">${escapeHtml(w.iqama_no ?? '—')}</div>
+                <div class="raw-td">${escapeHtml(trade)}</div>
+                <div class="raw-td">${escapeHtml(w.card_number ?? '—')} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${escapeHtml(w.issued_date ?? '—')}</div>
+                <div class="raw-td">${escapeHtml(w.expiry_date ?? '—')}</div>
+            </div>
  
             <!-- Exact Mobile Box View -->
-            <div class="mobile-box-view mt-3">
+            <div class="mobile-box-view mt-4">
                 <div class="data-group">
                     <div class="data-label">Name</div>
                     <div class="data-value">${escapeHtml(w.name ?? '—')}</div>
@@ -374,7 +385,6 @@
             </div>
         `;
         }
-
         function renderNotFound() {
             resultBox.innerHTML = `
             <div class="msg-fail">
@@ -424,13 +434,43 @@
         }
 
         .desktop-table-view {
+            display: none;
+            text-align: left;
+        }
+        
+        .mobile-box-view, .mobile-raw-text {
             display: block;
             text-align: left;
         }
+        
+        @media (min-width: 768px) {
+            .desktop-table-view {
+                display: block;
+            }
+            .mobile-box-view, .mobile-raw-text {
+                display: none;
+            }
+        }
 
-        .mobile-box-view {
-            display: block;
-            text-align: left;
+        /* --- Exact Styling for Broken Text Formatting --- */
+        .mobile-raw-text {
+            margin-bottom: 25px;
+        }
+        .mobile-raw-text .verify-data-label {
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        .mobile-raw-text .raw-th {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .mobile-raw-text .raw-td {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-top: 15px;
         }
 
 
@@ -519,19 +559,24 @@
             width: 50%;
             align-self: flex-end;
         }
-            @media only screen and (max-width: 768px) {
 
-                /* Adjust table header and cell padding */
-                .cmsmasters_table_row_header th,
-                .cmsmasters_table_cell_aligncenter {
-                    padding: 8px;
-                }
+        @media only screen and (max-width: 768px) {
 
-                /* Consider making table scrollable if needed */
-                .table-container {
-                    overflow-x: auto;
-                }
+            /* Adjust table header and cell padding */
+            .cmsmasters_table_row_header th,
+            .cmsmasters_table_cell_aligncenter {
+                padding: 8px;
             }
+
+            /* Consider making table scrollable if needed */
+            .table-container {
+                overflow-x: auto;
+            }
+        }
+
+        .tp-breadcrumb__bg {
+            filter: brightness(1.9);
+        }
     </style>
 </body>
 
