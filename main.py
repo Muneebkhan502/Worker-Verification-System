@@ -67,12 +67,11 @@ def edit_worker_page(worker_id: int, request: Request, db: Session = Depends(get
     })
     
 @app.get("/verify", response_model=list[WorkerResponse])
-def verify_worker(name: Optional[str] = None, 
-                    card_number: Optional[str] = None, 
+def verify_worker(card_number: Optional[str] = None, 
                     iqama_no: Optional[str] = None,
                     db: Session = Depends(get_db)):
     manager = WorkerManager(db)
-    return manager.verify_worker(name=name, card_number=card_number, iqama_no=iqama_no)
+    return manager.verify_worker(card_number=card_number, iqama_no=iqama_no)
     # if not worker:
     #     return HTTPException(status_code = 404, detail="Worker/Operator Not Found")
 @app.get("/worker/{worker_id}", response_model=WorkerResponse)

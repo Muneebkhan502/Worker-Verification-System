@@ -34,11 +34,9 @@ class WorkerManager():
         except HTTPException(status_code=500, detail="Worker data has not been saved"):
                 return self.db.rollback()
 
-    def verify_worker(self,name: Optional[str] = None, card_number: Optional[str] = None, iqama_no: Optional[str] = None):
+    def verify_worker(self, card_number: Optional[str] = None, iqama_no: Optional[str] = None):
         query = select(Worker)  # to get all workers
         conditions = []
-        if name:
-            conditions.append(Worker.name.ilike(f"%{name}%"))
         if card_number:
             conditions.append(Worker.card_number == card_number)
         if iqama_no:
