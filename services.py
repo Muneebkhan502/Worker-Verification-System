@@ -1,3 +1,5 @@
+from sys import exception
+
 from schemas import WorkerCreate, WorkerResponse, WorkerUpdate
 from sqlalchemy import select, or_
 from models import Worker
@@ -23,12 +25,14 @@ class WorkerManager():
             expiry_date=worker.expiry_date,
             status=worker.status
             )
+            
             self.db.add(new_worker)
             self.db.commit()
             self.db.refresh(new_worker)
             return new_worker
-        except HTTPException(status_code=500, detail="Worker data has not been saved"):
-                return self.db.rollback()
+        except Exception as e:
+            self.db.rollback()
+            raise HTTPException(status_code=500, detail=f"An error occurred while creating the worker: {str(e)}")
 
     def verify_worker(self, card_number: Optional[str] = None, iqama_no: Optional[str] = None):
         query = select(Worker)  # to get all workers
