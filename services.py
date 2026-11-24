@@ -12,10 +12,6 @@ class WorkerManager():
         if existing_card:
             raise HTTPException(status_code=400, detail="This card number is already registered!")
         
-        existing_iqama = self.db.execute(select(Worker).where(Worker.iqama_no == worker.iqama_no)).scalars().first()
-        if existing_iqama:
-            raise HTTPException(status_code=400, detail="This iqama number is already registered!")
-        
         try:
             new_worker = Worker(
             card_number=worker.card_number,

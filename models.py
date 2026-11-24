@@ -17,7 +17,7 @@ class Worker(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(255))
     card_number: Mapped[str] = mapped_column(unique=True, index=True)
-    iqama_no: Mapped[str] = mapped_column(unique=True, index=True)
+    iqama_no: Mapped[str] = mapped_column(index=True)
     company_name: Mapped[str]
     trade_course: Mapped[str]
     issued_date: Mapped[date]
